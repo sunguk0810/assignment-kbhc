@@ -25,8 +25,7 @@ import java.util.StringJoiner;
 @Table(name = "user",
         comment = "사용자 테이블",
         uniqueConstraints = {
-         @UniqueConstraint(columnNames = {"email"}, name = "UK_USER_EMAIL"),
-         @UniqueConstraint(columnNames = {"company_id"}, name = "UK_USER_COMPANY_ID")
+         @UniqueConstraint(columnNames = {"email"}, name = "UK_USER_EMAIL")
 })
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -42,6 +41,12 @@ public class User extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String recordKey;
 
+    /**
+     * 사용자 이메일 (로그인 ID)
+     * <p>
+     * 시스템 내에서 고유해야 하며, {@code UK_USER_EMAIL} 유니크 제약조건이 적용되어 중복 저장이 불가능합니다.
+     * </p>
+     */
     @Column(comment = "이메일", nullable = false)
     private String email;
 
@@ -52,6 +57,10 @@ public class User extends BaseEntity {
     @Column(comment = "이름", length = 100, nullable = false)
     private String username;
 
+    /**
+     * 암호화된 비밀번호
+     * <p>평문(Plain Text)이 아닌 해시(Hash) 처리된 문자열이 저장됩니다.</p>
+     */
     @Column(comment = "비밀번호", nullable = false)
     private String hashedPassword;
 
@@ -64,6 +73,10 @@ public class User extends BaseEntity {
     @Column(comment = "활성화여부", nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
     private Boolean isActive;
 
+    /**
+     * 마지막 로그인 일시
+     * <p>로그인 성공 시마다 갱신됩니다.</p>
+     */
     @Column(comment = "마지막로그인일자")
     private LocalDateTime lastLoginAt;
 
@@ -79,24 +92,33 @@ public class User extends BaseEntity {
      * @param isActive       활성화 여부
      */
     @Builder
-    public User(String email, String username, String hashedPassword, Company company, Boolean isActive) {
+    public User(String email, String username, String hashedPassword, Boolean isActive) {
         this.email = email;
         this.username = username;
         this.hashedPassword = hashedPassword;
-        this.company = company;
         this.isActive = isActive;
         this.lastLoginAt = LocalDateTime.now();
+    }
+
+    /**
+     * 마지막 로그인 시간을 현재 시간으로 갱신합니다.
+     *
+     * @return 갱신된 마지막 로그인 시간
+     */
+    public LocalDateTime updateLastLoginAt() {
+        this.lastLoginAt = LocalDateTime.now();
+        return this.lastLoginAt;
     }
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(recordKey, user.recordKey) && Objects.equals(email, user.email) && Objects.equals(username, user.username) && Objects.equals(hashedPassword, user.hashedPassword) && Objects.equals(company, user.company) && Objects.equals(isActive, user.isActive) && Objects.equals(lastLoginAt, user.lastLoginAt);
+        return Objects.equals(recordKey, user.recordKey) && Objects.equals(email, user.email) && Objects.equals(username, user.username) && Objects.equals(hashedPassword, user.hashedPassword) && Objects.equals(isActive, user.isActive) && Objects.equals(lastLoginAt, user.lastLoginAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(recordKey, email, username, hashedPassword, company, isActive, lastLoginAt);
+        return Objects.hash(recordKey, email, username, hashedPassword, isActive, lastLoginAt);
     }
 
     @Override
@@ -106,7 +128,6 @@ public class User extends BaseEntity {
                 .add("email='" + email + "'")
                 .add("username='" + username + "'")
                 .add("hashedPassword='" + hashedPassword + "'")
-                .add("company=" + company)
                 .add("isActive=" + isActive)
                 .add("lastLoginAt=" + lastLoginAt)
                 .toString();
