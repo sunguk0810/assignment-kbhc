@@ -1,4 +1,4 @@
-package com.github.sunguk0810.assignment.global.converter;
+package com.github.sunguk0810.assignment.global.config.converter;
 
 import com.github.sunguk0810.assignment.domain.health.entity.common.HealthDetail;
 import jakarta.persistence.AttributeConverter;

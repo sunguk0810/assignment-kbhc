@@ -3,6 +3,11 @@ spring:
     name: assignment
   profiles:
     active: dev
+
+jwt:
+  secret-key: 3Y+uo1AVMYeAFF+DK4fI6i3r4vlOz2FyZZ4BD9iTDjo=
+  access-expiration-time: 900000 # 15분
+  refresh-expiration-time: 604800000 # 7일
 ---
 spring:
   config:

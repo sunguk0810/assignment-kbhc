@@ -1,5 +1,6 @@
 package com.github.sunguk0810.assignment.domain.auth.entity;
 
+import com.github.sunguk0810.assignment.domain.auth.constant.RoleType;
 import com.github.sunguk0810.assignment.global.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -80,6 +81,14 @@ public class User extends BaseEntity {
     @Column(comment = "마지막로그인일자")
     private LocalDateTime lastLoginAt;
 
+    @Column(nullable = false, comment = "권한 타입")
+    @Enumerated(EnumType.STRING)
+    private RoleType roleType;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private UserProfile userProfile;
+
+
     /**
      * User 생성자 (Builder 패턴)
      * <p>
@@ -92,12 +101,26 @@ public class User extends BaseEntity {
      * @param isActive       활성화 여부
      */
     @Builder
-    public User(String email, String username, String hashedPassword, Boolean isActive) {
+    public User(String email, String username, String hashedPassword, RoleType roleType, Boolean isActive) {
         this.email = email;
         this.username = username;
         this.hashedPassword = hashedPassword;
         this.isActive = isActive;
+        this.roleType = roleType;
         this.lastLoginAt = LocalDateTime.now();
+    }
+
+    /**
+     * 사용자 프로필을 추가합니다.
+     *
+     * 전달된 {@link UserProfile} 객체와 현재 사용자 간의 연관관계를 설정하며,
+     * 사용자 객체의 {@code userProfile} 필드를 갱신합니다.
+     *
+     * @param profile 추가할 사용자 프로필 객체
+     */
+    public void addProfile(UserProfile profile){
+        profile.addUser(this);
+        this.userProfile = profile;
     }
 
     /**

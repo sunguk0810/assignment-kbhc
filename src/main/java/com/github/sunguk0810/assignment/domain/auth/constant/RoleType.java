@@ -1,17 +1,10 @@
 package com.github.sunguk0810.assignment.domain.auth.constant;
 
-import com.github.sunguk0810.assignment.domain.auth.entity.Role;
-import com.github.sunguk0810.assignment.domain.auth.entity.UserRole;
-
 /**
- * 시스템 내 사용자의 접근 권한(Authority) 유형을 정의하는 열거형입니다.
- * <p>
- * 보안 프레임워크(예: Spring Security)의 표준 명명 규칙({@code ROLE_} prefix)을 따르며,
- * {@link Role} 및 {@link UserRole} 엔티티에서 권한 관리를 위한 기준으로 사용됩니다.
- * </p>
+ * 사용자 권한 유형(Role Type)을 정의하는 열거형 클래스입니다.
  *
- * @see Role
- * @see UserRole
+ * 사용자 계정 및 인증과 관련된 역할을 구분하기 위해 사용됩니다.
+ * 각 권한 유형은 시스템에서 수행할 수 있는 작업의 범위와 접근 가능한 리소스를 제한하거나 허용하는 데 사용됩니다.
  */
 public enum RoleType {
     /**
@@ -24,5 +17,13 @@ public enum RoleType {
      * 시스템 관리자 (Admin)
      * <p>시스템 설정, 회원 관리 등 운영에 필요한 모든 기능에 접근할 수 있는 관리자 권한입니다.</p>
      */
-    ROLE_ADMIN
+    ROLE_ADMIN,
+
+    /**
+     * 익명 사용자 (Anonymous)
+     *
+     * 인증되지 않은 사용자를 나타내는 권한 유형입니다.
+     * 주로 시스템 내 공용 리소스에 접근할 수 있는 제한된 권한으로 사용됩니다.
+     */
+    ROLE_ANONYMOUS
 }

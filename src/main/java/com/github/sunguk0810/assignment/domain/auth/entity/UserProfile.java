@@ -41,14 +41,14 @@ public class UserProfile extends BaseEntity {
     private Long profileId;
 
     /**
-     * 사용자 식별 키 (FK 개념)
+     * 사용자 식별 정보 (FK)
      * <p>
-     * {@code User} 테이블의 식별자와 매핑됩니다.
-     * 유니크 제약조건({@code UK_USER_PROFILE_RECORD_KEY})이 있어, 한 명의 사용자는 하나의 프로필만 가질 수 있습니다.
+     * User 엔티티와 1:1 관계를 맺습니다.
      * </p>
      */
-    @JoinColumn(nullable = false, comment = "사용자 구분키")
-    private String recordKey;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "record_key", nullable = false, foreignKey = @ForeignKey(name = "FK_USER_PROFILE_RECORD_KEY"))
+    private User user;
 
     /**
      * 생년월일
@@ -85,10 +85,11 @@ public class UserProfile extends BaseEntity {
      */
     @Column(comment = "몸무게 (kg)")
     private Double weight;
+
     /**
      * UserProfile 생성자 (Builder 패턴)
      *
-     * @param recordKey 사용자 식별 키
+     * @param user 사용자
      * @param birthDate 생년월일
      * @param gender    성별 ({@link GenderType})
      * @param nickname  닉네임
@@ -97,8 +98,8 @@ public class UserProfile extends BaseEntity {
      * @param weight    몸무게 (kg)
      */
     @Builder
-    public UserProfile(String recordKey, LocalDate birthDate, GenderType gender, String nickname, String mobileNo, Double height, Double weight) {
-        this.recordKey = recordKey;
+    public UserProfile(User user, LocalDate birthDate, GenderType gender, String nickname, String mobileNo, Double height, Double weight) {
+        this.user = user;
         this.birthDate = birthDate;
         this.gender = gender;
         this.nickname = nickname;
@@ -111,19 +112,19 @@ public class UserProfile extends BaseEntity {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         UserProfile that = (UserProfile) o;
-        return Objects.equals(profileId, that.profileId) && Objects.equals(recordKey, that.recordKey) && Objects.equals(birthDate, that.birthDate) && gender == that.gender && Objects.equals(nickname, that.nickname) && Objects.equals(mobileNo, that.mobileNo) && Objects.equals(height, that.height) && Objects.equals(weight, that.weight);
+        return Objects.equals(profileId, that.profileId) && Objects.equals(user, that.user) && Objects.equals(birthDate, that.birthDate) && gender == that.gender && Objects.equals(nickname, that.nickname) && Objects.equals(mobileNo, that.mobileNo) && Objects.equals(height, that.height) && Objects.equals(weight, that.weight);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(profileId, recordKey, birthDate, gender, nickname, mobileNo, height, weight);
+        return Objects.hash(profileId, user, birthDate, gender, nickname, mobileNo, height, weight);
     }
 
     @Override
     public String toString() {
         return new StringJoiner(", ", UserProfile.class.getSimpleName() + "[", "]")
                 .add("profileId='" + profileId + "'")
-                .add("recordKey='" + recordKey + "'")
+                .add("user='" + user + "'")
                 .add("birthDate=" + birthDate)
                 .add("gender=" + gender)
                 .add("nickname='" + nickname + "'")
@@ -131,5 +132,9 @@ public class UserProfile extends BaseEntity {
                 .add("height=" + height)
                 .add("weight=" + weight)
                 .toString();
+    }
+
+    public void addUser(User user) {
+        this.user = user;
     }
 }

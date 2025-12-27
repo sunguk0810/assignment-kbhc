@@ -3,6 +3,7 @@ services:
   mysql:
     image: mysql:8.0-debian
     container_name: mysql_db
+    platform: linux/amd64
     restart: always
     ports:
       - "13306:3306"
@@ -21,6 +22,7 @@ services:
   redis:
     image: redis:7-alpine
     container_name: redis_cache
+    platform: linux/amd64
     restart: always
     ports:
       - "16379:6379"
@@ -29,6 +31,7 @@ services:
     command: redis-server --appendonly yes
   kafka:
     image: confluentinc/cp-kafka:latest
+    platform: linux/amd64
     ports:
       - "29092:29092"
     environment:
@@ -46,6 +49,7 @@ services:
       KAFKA_LOG_DIRS: "/tmp/kraft-combined-logs"
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
+    platform: linux/amd64
     ports:
       - "18080:8080"
     environment:

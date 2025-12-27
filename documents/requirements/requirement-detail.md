@@ -62,7 +62,7 @@
   {
     "status": "error",
     "message": "값 검증에 실패하였습니다.",
-    "errors": {
+    "error": {
       "email": ["email 필드의 값이 필요합니다."],
       "password": ["password 필드의 값이 유효하지 않습니다."]
     },
