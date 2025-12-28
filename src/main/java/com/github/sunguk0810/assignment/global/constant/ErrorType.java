@@ -38,6 +38,19 @@ public enum ErrorType {
      */
     INTERNAL_SERVER_ERROR(500, "C003", "서버 내부 오류입니다."),
 
+
+    /**
+     * JSON 형식이 올바르지 않은 경우
+     * <p>HTTP 500 Internal Server Error</p>
+     */
+    INVALID_JSON_FORMAT(500, "C004", "JSON 형식이 유효하지 않습니다."),
+
+
+    /**
+     * 로그 데이터를 찾을 수 없는 경우
+     * <p>HTTP 404 Not Found</p>
+     */
+    LOG_NOT_FOUND(404, "C005", "로그 데이터를 찾을 수 없습니다."),
     /**
      * 조회하려는 사용자가 존재하지 않는 경우
      * <p>HTTP 404 Not Found</p>
@@ -66,7 +79,8 @@ public enum ErrorType {
      * 리프레시 토큰의 유효 기간이 만료된 경우 (재로그인 필요)
      * <p>HTTP 401 Unauthorized</p>
      */
-    REFRESH_TOKEN_EXPIRED(401, "U005", "리프레시 토큰이 만료되었습니다.")
+    REFRESH_TOKEN_EXPIRED(401, "U005", "리프레시 토큰이 만료되었습니다."),
+
     ;
 
     /**

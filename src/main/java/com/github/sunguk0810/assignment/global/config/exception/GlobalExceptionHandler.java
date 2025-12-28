@@ -108,7 +108,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Void>> handleException(Exception e) {
-        log.error("handleException {}", e.getMessage());
+        log.error("handleException {}", e.getMessage(), e);
         ApiResponse<Void> response = ApiResponse.fail(e.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }

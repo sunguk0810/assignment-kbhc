@@ -71,9 +71,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(
                 c -> c
-                        .requestMatchers("/api/v1/auth/login").permitAll()
-                        .requestMatchers("/api/v1/auth/register").permitAll()
-                        .requestMatchers("/api/v1/auth/refresh-token").permitAll()
+                        .requestMatchers("/api/v1/auth/**").permitAll()
                         .requestMatchers("/favicon.ico").permitAll()
                         .requestMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**").permitAll() // 정적 리소스 허용
                 .anyRequest().authenticated()
