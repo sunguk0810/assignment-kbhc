@@ -1,10 +1,9 @@
 package com.github.sunguk0810.assignment.domain.health.dto.measure;
 
+import com.github.sunguk0810.assignment.domain.health.entity.common.HealthDetail;
 import com.github.sunguk0810.assignment.domain.health.entity.common.Quantity;
 import lombok.*;
-
-import java.util.Objects;
-import java.util.StringJoiner;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 걸음 수(Steps) 및 관련 활동량 데이터를 나타내는 클래스입니다.
@@ -18,8 +17,10 @@ import java.util.StringJoiner;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Builder
-public class Step {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+public class Step extends HealthDetail {
     /**
      * 측정된 총 걸음 횟수
      * <p>단위: {@code count}</p>
@@ -37,25 +38,4 @@ public class Step {
      * <p>일반적인 단위: {@code "kcal"}</p>
      */
     private Quantity calories;
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Step step = (Step) o;
-        return steps == step.steps && Objects.equals(distance, step.distance) && Objects.equals(calories, step.calories);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(steps, distance, calories);
-    }
-
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", Step.class.getSimpleName() + "[", "]")
-                .add("steps=" + steps)
-                .add("distance=" + distance)
-                .add("calories=" + calories)
-                .toString();
-    }
 }

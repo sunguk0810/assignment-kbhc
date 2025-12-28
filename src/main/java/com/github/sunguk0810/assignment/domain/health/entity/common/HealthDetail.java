@@ -1,9 +1,12 @@
 package com.github.sunguk0810.assignment.domain.health.entity.common;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.github.sunguk0810.assignment.domain.health.constant.MeasureType;
 import com.github.sunguk0810.assignment.domain.health.dto.measure.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 다양한 건강 측정 데이터(걸음 수, 혈압 등)를 추상화한 상위 인터페이스입니다.
@@ -21,17 +24,14 @@ import com.github.sunguk0810.assignment.domain.health.dto.measure.*;
  * <li>{@link BloodSugar} : 혈당 데이터</li>
  * </ul>
  */
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "type"
-)
-@JsonSubTypes({
-    @JsonSubTypes.Type(value = Step.class, name = MeasureType.Values.STEPS),
-    @JsonSubTypes.Type(value = BloodPressure.class, name = MeasureType.Values.BLOOD_PRESSURE),
-    @JsonSubTypes.Type(value = HeartRate.class, name = MeasureType.Values.HEART_RATE),
-    @JsonSubTypes.Type(value = OxygenSaturation.class, name = MeasureType.Values.OXYGEN_SATURATION),
-    @JsonSubTypes.Type(value = BloodSugar.class, name = MeasureType.Values.BLOOD_SUGAR)
-})
-public interface HealthDetail {
+@Getter
+@SuperBuilder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+public abstract class HealthDetail {
+    /**
+     * 측정 기간을 나타내는 공통 변수
+     * 모든 하위 클래스(Step, BloodPressure 등)가 이 필드를 공유합니다.
+     */
+    private Period period;
 }

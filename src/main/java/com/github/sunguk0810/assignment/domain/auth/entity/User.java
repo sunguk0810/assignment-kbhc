@@ -23,7 +23,7 @@ import java.util.StringJoiner;
  * @see BaseEntity
  */
 @Entity
-@Table(name = "user",
+@Table(name = "users",
         comment = "사용자 테이블",
         uniqueConstraints = {
          @UniqueConstraint(columnNames = {"email"}, name = "UK_USER_EMAIL")
@@ -38,7 +38,7 @@ public class User extends BaseEntity {
      * </p>
      */
     @Id
-    @Column(comment = "사용자 구분키")
+    @Column(comment = "사용자 구분키", name = "record_key")
     @GeneratedValue(strategy = GenerationType.UUID)
     private String recordKey;
 

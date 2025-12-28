@@ -1,5 +1,8 @@
 package com.github.sunguk0810.assignment.domain.health.entity.common;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
@@ -24,12 +27,18 @@ public class Period {
      * 측정 시작 일시
      */
     @Column(comment = "측정시작일자")
+    @JsonProperty("fromDate")
+    @JsonAlias({"fromDate", "from_date", "from"})
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime fromDate;
 
     /**
      * 측정 종료 일시
      */
     @Column(comment = "측정종료일자")
+    @JsonProperty("toDate")
+    @JsonAlias({"toDate", "to_date", "to"})
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime toDate;
     /**
      * Period 생성자 (Builder 패턴)

@@ -7,13 +7,8 @@ import com.github.sunguk0810.assignment.domain.health.entity.common.Period;
 import com.github.sunguk0810.assignment.global.config.converter.HealthDetailConverter;
 import com.github.sunguk0810.assignment.global.entity.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.util.Objects;
-import java.util.StringJoiner;
 /**
  * 사용자의 건강 측정 데이터를 저장하는 엔티티 클래스입니다.
  * <p>
@@ -29,6 +24,8 @@ import java.util.StringJoiner;
 @Entity
 @Table(name = "health_measure_infos", comment = "건강 측정 테이블")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EqualsAndHashCode
+@ToString
 public class HealthMeasureInfo extends BaseEntity {
     /**
      * 각 건강 측정 데이터를 고유하게 식별하기 위한 ID (PK)
@@ -88,33 +85,11 @@ public class HealthMeasureInfo extends BaseEntity {
      * @param period        측정 기간 ({@link Period})
      */
     @Builder
-    public HealthMeasureInfo(User userInfo, MeasureType measureType, HealthDetail measureDetail, Period period) {
+    public HealthMeasureInfo(User userInfo, MeasureType measureType, HealthDetail measureDetail, Period period, Long measureLogId) {
         this.userInfo = userInfo;
         this.measureType = measureType;
         this.measureDetail = measureDetail;
         this.period = period;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        HealthMeasureInfo that = (HealthMeasureInfo) o;
-        return Objects.equals(measureId, that.measureId) && Objects.equals(userInfo, that.userInfo) && measureType == that.measureType && Objects.equals(measureDetail, that.measureDetail) && Objects.equals(period, that.period);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(measureId, userInfo, measureType, measureDetail, period);
-    }
-
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", HealthMeasureInfo.class.getSimpleName() + "[", "]")
-                .add("measureId=" + measureId)
-                .add("userInfo=" + userInfo)
-                .add("measureType=" + measureType)
-                .add("measureDetail=" + measureDetail)
-                .add("period=" + period)
-                .toString();
+        this.measureLogId = measureLogId;
     }
 }

@@ -28,6 +28,14 @@ public interface UserRepository extends JpaRepository<User, String> {
      */
     Optional<User> findByEmail(String email);
 
+
+    /**
+     * 사용자 고유 식별 키(recordKey)를 기준으로 사용자 정보를 조회합니다.
+     *
+     * @param recordKey 조회할 사용자의 고유 식별 키
+     * @return 해당 recordKey를 가진 사용자 엔티티 (존재하지 않을 수 있음)
+     */
+    Optional<User> findByRecordKey(String recordKey);
     /**
      * 이메일 중복 여부를 확인합니다.
      * <p>

@@ -3,9 +3,7 @@ package com.github.sunguk0810.assignment.domain.health.dto.measure;
 import com.github.sunguk0810.assignment.domain.health.entity.common.HealthDetail;
 import com.github.sunguk0810.assignment.domain.health.entity.common.Quantity;
 import lombok.*;
-
-import java.util.Objects;
-import java.util.StringJoiner;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 산소포화도(Oxygen Saturation) 측정 데이터를 나타내는 클래스입니다.
@@ -19,8 +17,10 @@ import java.util.StringJoiner;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Builder
-public class OxygenSaturation {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+public class OxygenSaturation extends HealthDetail{
     /**
      * 실제 측정된 산소포화도 데이터
      * <p>
@@ -28,23 +28,4 @@ public class OxygenSaturation {
      * </p>
      */
     private Quantity oxygenSaturation;
-
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", OxygenSaturation.class.getSimpleName() + "[", "]")
-                .add("oxygenSaturation=" + oxygenSaturation)
-                .toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        OxygenSaturation that = (OxygenSaturation) o;
-        return Objects.equals(oxygenSaturation, that.oxygenSaturation);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(oxygenSaturation);
-    }
 }
