@@ -1,5 +1,6 @@
 package com.github.sunguk0810.assignment.domain.auth.service;
 
+import com.github.sunguk0810.assignment.domain.auth.dto.request.LogoutRequest;
 import com.github.sunguk0810.assignment.domain.auth.dto.request.RefreshTokenRequest;
 import com.github.sunguk0810.assignment.domain.auth.dto.request.UserLoginRequest;
 import com.github.sunguk0810.assignment.domain.auth.dto.response.AuthTokenResponse;
@@ -18,14 +19,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
-// https://github.com/KimuJinsu/spring-security-jwt/blob/main/jwt/src/main/java/com/jwt/demo/controller/AuthController.java
 @Slf4j
 @RequiredArgsConstructor
 @Service
@@ -37,7 +35,7 @@ public class AuthServiceImpl implements AuthService{
 
     @Transactional
     @Override
-    public Optional<AuthTokenResponse> login(UserLoginRequest request) {
+    public AuthTokenResponse login(UserLoginRequest request) {
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword());
 
         Authentication authentication = authenticationManagerBuilder
@@ -56,20 +54,16 @@ public class AuthServiceImpl implements AuthService{
         TokenResponse accessToken = tokenProvider.createToken(authentication, true);
         TokenResponse refreshToken = tokenProvider.createAndPersistRefreshToken(authentication);
 
-        AuthTokenResponse tokenResponse = AuthTokenResponse.builder()
+        return AuthTokenResponse.builder()
                 .accessToken(accessToken.getToken())
                 .refreshToken(refreshToken.getToken())
                 .tokenType("Bearer")
                 .expiresIn(accessToken.getExpiresIn())
                 .build();
-
-
-
-        return Optional.ofNullable(tokenResponse);
     }
 
     @Override
-    public Optional<TokenResponse> refresh(RefreshTokenRequest request) {
+    public TokenResponse refresh(RefreshTokenRequest request) {
         String refreshToken = request.getRefreshToken();
         log.info("refreshToken = {}", refreshToken);
         TokenInfo tokenInfo = tokenRepository
@@ -93,14 +87,21 @@ public class AuthServiceImpl implements AuthService{
                 null,
                 customUserDetails.getAuthorities()
         );
-
-
-        TokenResponse tokenResponse = tokenProvider.createToken(authentication, true);
-        return Optional.ofNullable(tokenResponse);
+        return tokenProvider.createToken(authentication, true);
     }
 
     public boolean isTokenExpired(TokenInfo tokenInfo){
         return tokenInfo.getExpiryDate().isBefore(LocalDateTime.now());
     }
 
+    @Override
+    public Boolean logout(LogoutRequest request) {
+        TokenInfo tokenInfo = tokenRepository
+                .findByRefreshToken(request.getRefreshToken())
+                .orElseThrow(() -> new BusinessException(ErrorType.REFRESH_TOKEN_NOT_FOUND));
+
+        tokenRepository.delete(tokenInfo);
+
+        return true;
+    }
 }

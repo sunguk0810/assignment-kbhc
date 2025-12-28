@@ -1,5 +1,7 @@
 package com.github.sunguk0810.assignment.global.config;
 
+import com.github.sunguk0810.assignment.domain.auth.entity.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
@@ -18,6 +20,7 @@ import java.util.Optional;
  *
  * @see EnableJpaAuditing
  */
+@Slf4j
 @Configuration
 @EnableJpaAuditing
 public class JpaAuditConfig {
@@ -39,6 +42,12 @@ public class JpaAuditConfig {
                     "anonymousUser".equals(authentication.getPrincipal())) {
                 return Optional.of("ANONYMOUS");
             }
+
+            if (authentication.getPrincipal() instanceof User user) {
+                log.info("User = {}", user);
+                return Optional.of(user.getRecordKey());
+            }
+
             return Optional.ofNullable(authentication.getName());
         };
     }

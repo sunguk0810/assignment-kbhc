@@ -1,11 +1,10 @@
 package com.github.sunguk0810.assignment.domain.auth.service;
 
+import com.github.sunguk0810.assignment.domain.auth.dto.request.LogoutRequest;
 import com.github.sunguk0810.assignment.domain.auth.dto.request.RefreshTokenRequest;
 import com.github.sunguk0810.assignment.domain.auth.dto.request.UserLoginRequest;
 import com.github.sunguk0810.assignment.domain.auth.dto.response.AuthTokenResponse;
 import com.github.sunguk0810.assignment.domain.auth.dto.response.TokenResponse;
-
-import java.util.Optional;
 
 
 /**
@@ -31,7 +30,7 @@ public interface AuthService {
      * @throws com.github.sunguk0810.assignment.global.config.exception.BusinessException
      * 비밀번호 불일치, 존재하지 않는 사용자 등 인증 실패 시 발생
      */
-    Optional<AuthTokenResponse> login(UserLoginRequest request);
+    AuthTokenResponse login(UserLoginRequest request);
 
     /**
      * 리프레시 토큰을 사용하여 새로운 액세스 토큰을 재발급합니다.
@@ -46,6 +45,15 @@ public interface AuthService {
      * @throws com.github.sunguk0810.assignment.global.config.exception.BusinessException
      * 토큰이 만료되었거나(Expired), 위변조되었거나, DB에 없을 경우 발생
      */
-    Optional<TokenResponse> refresh(RefreshTokenRequest request);
+    TokenResponse refresh(RefreshTokenRequest request);
 
+
+    /**
+     * 사용자의 로그아웃 요청을 처리합니다.
+     * 서버에 저장된 리프레시 토큰을 삭제하여 더 이상 해당 토큰으로 새로운 액세스 토큰을 발급받을 수 없게 합니다.
+     *
+     * @param request 로그아웃 요청 정보(삭제할 리프레시 토큰 포함)
+     * @return 로그아웃 성공 여부를 반환 (성공 시 true, 실패 시 false)
+     */
+    Boolean logout(LogoutRequest request);
 }

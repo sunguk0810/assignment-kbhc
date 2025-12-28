@@ -171,8 +171,14 @@ public class TokenProvider implements InitializingBean {
                 .getBody();
 
         Collection<? extends GrantedAuthority> authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(claims.get(AUTHORITIES_KEY).toString());
+        String recordKey = claims.get("recordKey", String.class);
+        String username = claims.get("username", String.class);
 
-        User principal = User.builder().email(claims.getSubject()).build();
+        User principal = User.builder()
+                .email(claims.getSubject())
+                .recordKey(recordKey)
+                .username(username)
+                .build();
         return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }
 

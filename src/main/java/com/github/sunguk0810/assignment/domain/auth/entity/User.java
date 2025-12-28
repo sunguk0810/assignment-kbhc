@@ -101,7 +101,8 @@ public class User extends BaseEntity {
      * @param isActive       활성화 여부
      */
     @Builder
-    public User(String email, String username, String hashedPassword, RoleType roleType, Boolean isActive) {
+    public User(String recordKey, String email, String username, String hashedPassword, RoleType roleType, Boolean isActive) {
+        this.recordKey = recordKey;
         this.email = email;
         this.username = username;
         this.hashedPassword = hashedPassword;
