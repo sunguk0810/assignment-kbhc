@@ -34,7 +34,7 @@
       - 인증 토큰은 `Authorization : Bearer JWT Token` 형식을 따른다.
     - 요구사항에 특정한 명시가 없으면 요청은 JSON 형식을 따른다.
     - 응답 데이터는 아래의 형식을 따른다. (예: Access Token 요청)
-  ```json
+  ```json5
   {
     "status": "success", // ['success', 'failure']
     "message": "정상적으로 수행하였습니다.",
@@ -86,7 +86,6 @@
           - 고객의 경우 개인의 신체 계측정보는 확인할 수 있지만, 타인의 신체계측 정보의 조회 및 추가, 삭제, 수정을 할 수 없다.
       - 따라서 고객은 각각 접근할 수 있는 기능의 제약을 위해 **권한정보를 설정할 수 있도록 도메인을 설계**해야하며,
         **회원의 정보 및 권한 정보를 JWT (JSON Web Token)으로 관리**할 수 있도록 구성한다.
-
 ---
 - 요구사항 고유번호 : `SFR-02-001`
 - 요구사항 명칭 : [회원] 회원가입
@@ -110,7 +109,7 @@
         - 키
         - 몸무게
     - 회원가입 API 요청시 다음과 같은 형식으로 보내야 한다.
-    ```json
+    ```json5
     {
       "email": "xxx@xxx.com", // 이메일
       "username": "김철수", // 이름
@@ -134,12 +133,69 @@
   - 정의 : 서비스 기능을 사용하기 위한 로그인 요구사항을 정의한다.
   - 세부내용
     - 이메일과 비밀번호를 이용하여 로그인을 진행한다.
+    - 로그인 성공 시 **Access Token과 Refresh Token을 발급**한다.
     - 로그인 API 요청시 다음과 같은 형식으로 보내야 한다.
   ```json
       {
         "email": "xxx@xxx.com",
         "password": "abc1234!@"
       } 
+  ```
+    - 응답 데이터는 아래의 형식을 따른다.
+  ```json
+  {
+    "status": "success",
+    "message": "로그인되었습니다.",
+    "data": {
+      "accessToken": "eyJhbGciOiJIUzI1NiJ9...",
+      "refreshToken": "dGhpcyBpcyBhIHJlZnJlc2ggdG9rZW4...",
+      "tokenType": "Bearer",
+      "expiresIn": 1800
+    },
+    "createdAt": "2025-12-26T03:00:00"
+  }
+  ```
+
+---
+- 요구사항 고유번호 : `SFR-02-003`
+- 요구사항 명칭 : [회원] 토큰 재발급 (Refresh)
+- 요구사항 상세설명
+  - 정의 : Access Token 만료 시 Refresh Token을 이용하여 새로운 토큰을 발급받는다.
+  - 세부내용
+    - 클라이언트는 보유한 Refresh Token을 전송하여 새로운 Access Token을 요청한다.
+    - 서버는 Redis 등에 저장된 Refresh Token의 유효성을 검증한 후, 유효하다면 새로운 Access Token을 발급한다.
+    - Refresh Token이 만료되었거나 유효하지 않은 경우 예외 처리한다.
+    - 요청 형식:
+  ```json
+  {
+    "refreshToken": "dGhpcyBpcyBhIHJlZnJlc2ggdG9rZW4..."
+  }
+  ```
+    - 응답 형식:
+  ```json
+  {
+    "status": "success",
+    "message": "토큰이 갱신되었습니다.",
+    "data": {
+      "token": "new_access_token_value...",
+      "expiresIn": 1800
+    },
+    "createdAt": "2025-12-26T03:10:00"
+  }
+  ```
+---
+- 요구사항 고유번호 : `SFR-02-004`
+- 요구사항 명칭 : [회원] 로그아웃
+- 요구사항 상세설명
+  - 정의 : 사용자가 서비스 사용을 종료하고 로그아웃을 요청한다.
+  - 세부내용
+    - 로그아웃 시 서버는 저장소(Redis)에 저장된 해당 사용자의 Refresh Token을 삭제하여 무효화한다.
+    - 이후 해당 Refresh Token으로는 토큰 재발급이 불가능해야 한다.
+    - 요청 형식:
+  ```json
+  {
+    "refreshToken": "dGhpcyBpcyBhIHJlZnJlc2ggdG9rZW4..."
+  }
   ```
 ---
 - 요구사항 고유번호 : `SFR-03-001`
@@ -148,20 +204,27 @@
   - 정의 : 회원의 삼성헬스, 애플 건강의 측정 정보를 수집하여 서비스에 저장한다.
   - 세부내용
     - 회원의 삼성헬스, 애플 건강 측정 정보, 기타 그 이외의 항목들을 관리 및 저장하기 위해 검사 항목 관리 기능을 개발한다.
-      - 건강 측정 정보는 들어온 요청 원본 JSON 값을 저장한다.
-        - 원본 로그 ID
-        - 사용자 구분 키
-        - 수신일시
-        - 데이터 출처
-          - `HEALTH_SAMSUNG`: 삼성 헬스로 유입된 데이터
-          - `HEALTH_APPLE`: 애플 건강으로 유입된 데이터
-      - 건강 측정 정보는 일일 요약 테이블에 저장하여 불필요한 원본 데이터 접근을 지양한다.
-        - 요약일자
-        - 항목 코드
-        - 합계
-        - 평균
-        - 최소
-        - 최대
+    - 데이터는 **원본 로그(Raw Data)**와 **측정 상세 정보(Measure Info)**로 분리하여 관리한다.
+      1. **건강 측정 로그 (Raw Data)**
+         - 외부 시스템(삼성헬스, 애플건강)으로부터 들어온 **요청 원본(JSON Payload)을 그대로 저장**하여 데이터 무결성을 확보하고 추후 디버깅에 활용한다.
+         - 저장 항목:
+           - 측정 로그 ID (PK)
+           - 데이터 출처 (`HEALTH_SAMSUNG`, `HEALTH_APPLE`)
+           - 원본 JSON 데이터 (Payload)
+           - 수신 일시 (`createdAt`)
+
+         2. **건강 측정 상세 정보 (Measure Info)**
+         - 원본 로그를 기반으로 서비스에서 활용 가능한 형태로 가공하여 저장한다.
+         - 다양한 측정 타입(걸음 수, 혈압, 심박수 등)을 유연하게 처리하기 위해 **상세 정보는 JSON 형태**로 저장하며, 측정 기간을 포함한다.
+         - 저장 항목:
+           - 측정 ID (PK)
+           - **참조 로그 ID** (원본 로그와의 연결 고리)
+           - 사용자 정보 (User Reference)
+           - **측정 타입** (`STEPS`, `BLOOD_PRESSURE`, `HEART_RATE` 등)
+           - **측정 기간** (`Period`): 측정 시작 일시, 측정 종료 일시
+           - **상세 데이터** (JSON): 측정 타입에 따른 가변 데이터
+             - 예) 혈압: `{ "systolic": 120, "diastolic": 80 }`
+             - 예) 걸음: `{ "count": 10000, "distance": 5.2 }`
 ---
 - 요구사항 고유번호 : `SFR-03-002`
 - 요구사항 명칭 : [건강측정] 건강측정 정보 조회
@@ -181,20 +244,20 @@
           - distance
           - recordKey
       - 제공될 데이터의 응답 형식은 다음과 같다.
-```json
-{
-  "status":"success",
-  "message":"정상적으로 수행하였습니다.",
-  "data":[
-      {
-      "type":"daily", // "daily" or "monthly"
-      "recordDate":"2024-11-01", // "YYYY-MM-DD" or "YYYY-MM"
-      "steps":10000,
-      "calories":700,
-      "distance":2.75,
-      "recordKey":""
-      }
-  ],
-  "createdAt":"2025-12-26T03:00:00"
-}
-```
+  ```json5
+  {
+    "status":"success",
+    "message":"정상적으로 수행하였습니다.",
+    "data":[
+        {
+        "type":"daily", // "daily" or "monthly"
+        "recordDate":"2024-11-01", // "YYYY-MM-DD" or "YYYY-MM"
+        "steps":10000,
+        "calories":700,
+        "distance":2.75,
+        "recordKey":""
+        }
+    ],
+    "createdAt":"2025-12-26T03:00:00"
+  }
+  ```
