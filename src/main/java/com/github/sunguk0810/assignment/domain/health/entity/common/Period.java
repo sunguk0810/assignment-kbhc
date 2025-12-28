@@ -1,8 +1,6 @@
 package com.github.sunguk0810.assignment.domain.health.entity.common;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
@@ -26,36 +24,32 @@ public class Period {
     /**
      * 측정 시작 일시
      */
-    @Column(comment = "측정시작일자")
-    @JsonProperty("fromDate")
-    @JsonAlias({"fromDate", "from_date", "from"})
+    @Column(comment = "측정시작일자", name = "from_date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-    private LocalDateTime fromDate;
+    private LocalDateTime from;
 
     /**
      * 측정 종료 일시
      */
-    @Column(comment = "측정종료일자")
-    @JsonProperty("toDate")
-    @JsonAlias({"toDate", "to_date", "to"})
+    @Column(comment = "측정종료일자", name = "to_date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-    private LocalDateTime toDate;
+    private LocalDateTime to;
     /**
      * Period 생성자 (Builder 패턴)
      * <p>
      * 시작 시간이 종료 시간보다 늦을 경우 예외를 발생시킵니다.
      * </p>
      *
-     * @param fromDate 측정 시작 일시
-     * @param toDate   측정 종료 일시
-     * @throws IllegalArgumentException {@code fromDate}가 {@code toDate}보다 이후일 경우 발생
+     * @param from 측정 시작 일시
+     * @param to   측정 종료 일시
+     * @throws IllegalArgumentException {@code from}가 {@code toDate}보다 이후일 경우 발생
      */
     @Builder
-    public Period(LocalDateTime fromDate, LocalDateTime toDate) {
-        if (fromDate.isAfter(toDate)) {
+    public Period(LocalDateTime from, LocalDateTime to) {
+        if (from.isAfter(to)) {
             throw new IllegalArgumentException("시작 시간은 종료시간보다 앞서야 합니다.");
         }
-        this.fromDate = fromDate;
-        this.toDate = toDate;
+        this.from = from;
+        this.to = to;
     }
 }

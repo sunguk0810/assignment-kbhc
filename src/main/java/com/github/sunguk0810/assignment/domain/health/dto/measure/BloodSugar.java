@@ -3,9 +3,7 @@ package com.github.sunguk0810.assignment.domain.health.dto.measure;
 import com.github.sunguk0810.assignment.domain.health.entity.common.HealthDetail;
 import com.github.sunguk0810.assignment.domain.health.entity.common.Quantity;
 import lombok.*;
-
-import java.util.Objects;
-import java.util.StringJoiner;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 혈당(Blood Sugar) 측정 데이터를 나타내는 클래스입니다.
@@ -20,8 +18,10 @@ import java.util.StringJoiner;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Builder
-public class BloodSugar {
+@SuperBuilder
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+public class BloodSugar extends HealthDetail{
 
     /**
      * 실제 측정된 혈당 수치 데이터
@@ -31,22 +31,5 @@ public class BloodSugar {
      */
     private Quantity bloodSugar;
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        BloodSugar that = (BloodSugar) o;
-        return Objects.equals(bloodSugar, that.bloodSugar);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(bloodSugar);
-    }
-
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", BloodSugar.class.getSimpleName() + "[", "]")
-                .add("bloodSugar=" + bloodSugar)
-                .toString();
-    }
 }

@@ -4,7 +4,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
-import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -53,7 +52,7 @@ public class BaseEntity {
      * </p>
      */
     @CreatedBy
-    @Column(updatable = false, comment = "생성자", columnDefinition = "VARCHAR(50) DEFAULT 'ANONYMOUS'")
+    @Column(updatable = false, comment = "생성자", columnDefinition = "VARCHAR(255) DEFAULT 'ANONYMOUS'")
     private String createdBy;
 
     /**
@@ -63,6 +62,6 @@ public class BaseEntity {
      * </p>
      */
     @LastModifiedBy
-    @Column(comment = "수정자", columnDefinition = "VARCHAR(50) DEFAULT 'ANONYMOUS'")
+    @Column(comment = "수정자", columnDefinition = "VARCHAR(255) DEFAULT 'ANONYMOUS'")
     private String updatedBy;
 }
