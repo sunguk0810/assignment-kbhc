@@ -23,6 +23,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -65,7 +66,6 @@ public class AuthServiceImpl implements AuthService{
     @Override
     public TokenResponse refresh(RefreshTokenRequest request) {
         String refreshToken = request.getRefreshToken();
-        log.info("refreshToken = {}", refreshToken);
         TokenInfo tokenInfo = tokenRepository
                 .findByRefreshToken(refreshToken)
                 .orElseThrow(() -> new BusinessException(ErrorType.REFRESH_TOKEN_NOT_FOUND));
@@ -95,13 +95,14 @@ public class AuthServiceImpl implements AuthService{
     }
 
     @Override
-    public Boolean logout(LogoutRequest request) {
-        TokenInfo tokenInfo = tokenRepository
-                .findByRefreshToken(request.getRefreshToken())
+    public Boolean logout(String recordKey, LogoutRequest request) {
+        TokenInfo tokenInfo = tokenRepository.findByRefreshToken(request.getRefreshToken())
                 .orElseThrow(() -> new BusinessException(ErrorType.REFRESH_TOKEN_NOT_FOUND));
 
+        if (!tokenInfo.getRecordKey().equals(recordKey)){
+            throw new BusinessException(ErrorType.UNAUTHORIZED);
+        }
         tokenRepository.delete(tokenInfo);
-
         return true;
     }
 }

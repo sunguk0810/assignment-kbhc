@@ -52,8 +52,9 @@ public interface AuthService {
      * 사용자의 로그아웃 요청을 처리합니다.
      * 서버에 저장된 리프레시 토큰을 삭제하여 더 이상 해당 토큰으로 새로운 액세스 토큰을 발급받을 수 없게 합니다.
      *
-     * @param request 로그아웃 요청 정보(삭제할 리프레시 토큰 포함)
+     * @param recordKey 사용자 구분
+     * @param request  리프레시 토큰 정보
      * @return 로그아웃 성공 여부를 반환 (성공 시 true, 실패 시 false)
      */
-    Boolean logout(LogoutRequest request);
+    Boolean logout(String recordKey, LogoutRequest request);
 }

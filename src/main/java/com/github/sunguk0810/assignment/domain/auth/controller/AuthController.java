@@ -6,15 +6,23 @@ import com.github.sunguk0810.assignment.domain.auth.dto.request.UserLoginRequest
 import com.github.sunguk0810.assignment.domain.auth.dto.request.UserRegisterRequest;
 import com.github.sunguk0810.assignment.domain.auth.dto.response.AuthTokenResponse;
 import com.github.sunguk0810.assignment.domain.auth.dto.response.TokenResponse;
+import com.github.sunguk0810.assignment.domain.auth.entity.User;
 import com.github.sunguk0810.assignment.domain.auth.service.AuthService;
 import com.github.sunguk0810.assignment.domain.auth.service.UserService;
+import com.github.sunguk0810.assignment.global.config.exception.BusinessException;
+import com.github.sunguk0810.assignment.global.constant.ErrorType;
+import com.github.sunguk0810.assignment.global.dto.auth.CustomUserDetails;
 import com.github.sunguk0810.assignment.global.dto.response.ApiResponse;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 
 @RestController
@@ -82,12 +90,19 @@ public class AuthController {
      * 서버 측 Redis에 저장된 리프레시 토큰을 삭제하여 더 이상 토큰 갱신이 불가능하게 만듭니다.
      * </p>
      *
-     * @param request 로그아웃할 리프레시 토큰 정보
      * @return 데이터 없는 성공 응답
      */
     @PostMapping("logout")
-    public ApiResponse<Void> logout(@Valid @RequestBody LogoutRequest request){
-        authService.logout(request);
+    public ApiResponse<Void> logout(@RequestBody @Valid LogoutRequest request, Principal principal){
+        if (principal == null){
+            throw new BusinessException(ErrorType.USER_NOT_FOUND);
+        }
+        if (principal instanceof UsernamePasswordAuthenticationToken token){
+            if (token.getPrincipal() != null && token.getPrincipal() instanceof User user){
+                String recordKey = user.getRecordKey();
+                authService.logout(recordKey, request);
+            }
+        }
         return ApiResponse.success(null, "로그아웃이 완료되었습니다.");
     }
 }
