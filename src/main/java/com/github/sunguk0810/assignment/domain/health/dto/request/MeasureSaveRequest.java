@@ -1,8 +1,6 @@
 package com.github.sunguk0810.assignment.domain.health.dto.request;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.*;
 import com.github.sunguk0810.assignment.domain.health.constant.MeasureType;
 import com.github.sunguk0810.assignment.domain.health.dto.device.DeviceInfo;
 import com.github.sunguk0810.assignment.domain.health.dto.measure.*;
@@ -43,6 +41,8 @@ public class MeasureSaveRequest<T extends HealthDetail> {
     /**
      * 해당 측정 데이터의 고유 식별 키
      */
+    @JsonProperty("recordKey")
+    @JsonAlias({"record_key", "recordKey", "recordkey"})
     @NotNull(message = "측정 데이터 고유 식별 키는 필수입니다.")
     private String recordKey;
 

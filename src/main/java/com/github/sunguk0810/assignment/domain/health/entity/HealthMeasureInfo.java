@@ -22,9 +22,16 @@ import lombok.*;
  */
 @Getter
 @Entity
-@Table(name = "health_measure_infos", comment = "건강 측정 테이블")
+@Table(name = "health_measure_infos",
+        comment = "건강 측정 테이블",
+        uniqueConstraints = {
+            @UniqueConstraint(
+                    name="UK_HEALTH_MEASURE_INFO_USER_MEASURE_PERIOD",
+                    columnNames = {"record_key", "measure_type", "from_date", "to_date"}
+            )
+        })
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @ToString
 public class HealthMeasureInfo extends BaseEntity {
     /**
@@ -70,10 +77,6 @@ public class HealthMeasureInfo extends BaseEntity {
      * <p>{@link Period} 임베디드 타입을 사용하여 매핑됩니다.</p>
      */
     @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "fromDate", column = @Column(name = "measure_from_date", comment = "측정시작일자")),
-            @AttributeOverride(name = "toDate", column = @Column(name = "measure_to_date", comment = "측정종료일자"))
-    })
     private Period period;
 
     /**

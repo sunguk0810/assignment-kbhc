@@ -28,7 +28,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public abstract class HealthDetail {
+public class HealthDetail {
     /**
      * 측정 기간을 나타내는 공통 변수
      * 모든 하위 클래스(Step, BloodPressure 등)가 이 필드를 공유합니다.

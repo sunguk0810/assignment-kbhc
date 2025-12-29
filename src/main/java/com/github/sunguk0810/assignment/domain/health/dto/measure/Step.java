@@ -1,5 +1,6 @@
 package com.github.sunguk0810.assignment.domain.health.dto.measure;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.github.sunguk0810.assignment.domain.health.entity.common.HealthDetail;
 import com.github.sunguk0810.assignment.domain.health.entity.common.Quantity;
 import lombok.*;
@@ -25,7 +26,8 @@ public class Step extends HealthDetail {
      * 측정된 총 걸음 횟수
      * <p>단위: {@code count}</p>
      */
-    private int steps;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    private Double steps;
 
     /**
      * 이동 거리 데이터

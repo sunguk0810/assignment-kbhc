@@ -22,7 +22,7 @@ public class HealthMeasureSummary extends BaseEntity {
     private Long summaryId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "record_key", nullable = false, comment = "사용자 구분 키")
+    @JoinColumn(name = "record_key", nullable = false, comment = "사용자 구분 키", foreignKey = @ForeignKey(name = "FK_HEALTH_MEASURE_SUMMARY_RECORD_KEY"))
     private User user;
 
     @Column(comment = "요약일자")
@@ -66,6 +66,7 @@ public class HealthMeasureSummary extends BaseEntity {
         if (isAccumulate){
             // 누적형 데이터 (예: 걸음 수) - 기존 값에 더함
             this.sumValue += newValue;
+            this.avgValue = ((this.avgValue * (this.count - 1)) + newValue) / this.count;
         } else {
             this.avgValue = ((this.avgValue * (this.count - 1)) + newValue) / this.count;
         }

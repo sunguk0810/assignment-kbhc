@@ -1,12 +1,13 @@
 package com.github.sunguk0810.assignment.domain.health.entity.common;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.github.sunguk0810.assignment.global.config.serializer.MobileDateSerializer;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import tools.jackson.databind.annotation.JsonDeserialize;
 
 import java.time.LocalDateTime;
 
@@ -25,14 +26,14 @@ public class Period {
      * 측정 시작 일시
      */
     @Column(comment = "측정시작일자", name = "from_date")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    @JsonDeserialize(using = MobileDateSerializer.class)
     private LocalDateTime from;
 
     /**
      * 측정 종료 일시
      */
     @Column(comment = "측정종료일자", name = "to_date")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    @JsonDeserialize(using = MobileDateSerializer.class)
     private LocalDateTime to;
     /**
      * Period 생성자 (Builder 패턴)
