@@ -1,5 +1,7 @@
 package com.github.sunguk0810.assignment.global.config.security;
 
+import com.github.sunguk0810.assignment.global.config.filter.ExceptionHandlerFilter;
+import com.github.sunguk0810.assignment.global.config.filter.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -23,6 +25,8 @@ public class JwtSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurity
      */
     private final TokenProvider tokenProvider;
 
+    private final ExceptionHandlerFilter exceptionHandlerFilter;
+
     /**
      * HttpSecurity 빌더를 통해 커스텀 보안 설정을 적용합니다.
      * <p>
@@ -34,9 +38,8 @@ public class JwtSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurity
      */
     @Override
     public void configure(HttpSecurity http) {
-        http.addFilterBefore(
-                new JwtFilter(tokenProvider),
-                UsernamePasswordAuthenticationFilter.class
-        );
+        http
+                .addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(exceptionHandlerFilter, JwtFilter.class);
     }
 }

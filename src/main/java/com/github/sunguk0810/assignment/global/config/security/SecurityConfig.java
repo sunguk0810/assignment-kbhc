@@ -1,5 +1,6 @@
 package com.github.sunguk0810.assignment.global.config.security;
 
+import com.github.sunguk0810.assignment.global.config.filter.ExceptionHandlerFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,6 +37,8 @@ public class SecurityConfig {
      * 인가 실패(403 Forbidden) 시 예외 처리 핸들러
      */
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+
+    private final ExceptionHandlerFilter exceptionHandlerFilter;
 
     /**
      * HTTP 보안 설정을 구성하고 필터 체인을 생성하는 빈(Bean)입니다.
@@ -78,7 +81,7 @@ public class SecurityConfig {
         );
 
 
-        http.apply(new JwtSecurityConfig(tokenProvider));
+        http.apply(new JwtSecurityConfig(tokenProvider, exceptionHandlerFilter));
         return http.build();
     }
 }

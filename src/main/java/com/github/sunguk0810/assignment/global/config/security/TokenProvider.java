@@ -3,6 +3,8 @@ package com.github.sunguk0810.assignment.global.config.security;
 import com.github.sunguk0810.assignment.domain.auth.dto.response.TokenResponse;
 import com.github.sunguk0810.assignment.domain.auth.entity.User;
 import com.github.sunguk0810.assignment.domain.auth.entity.UserProfile;
+import com.github.sunguk0810.assignment.global.config.exception.BusinessException;
+import com.github.sunguk0810.assignment.global.constant.ErrorType;
 import com.github.sunguk0810.assignment.global.dto.auth.CustomUserDetails;
 import com.github.sunguk0810.assignment.global.dto.auth.TokenInfo;
 import com.github.sunguk0810.assignment.global.repository.TokenRepository;
@@ -195,7 +197,7 @@ public class TokenProvider implements InitializingBean {
         } catch (SecurityException | MalformedJwtException e) {
             log.info("Invalid JWT signature");
         } catch (ExpiredJwtException e) {
-            log.info("Expired JWT token");
+            throw new BusinessException(ErrorType.ACCESS_TOKEN_EXPIRED);
         } catch (UnsupportedJwtException e) {
             log.info("Unsupported JWT token");
         } catch (IllegalArgumentException e) {

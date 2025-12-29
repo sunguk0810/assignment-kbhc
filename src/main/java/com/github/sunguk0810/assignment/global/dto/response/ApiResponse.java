@@ -45,6 +45,9 @@ public class ApiResponse<T> {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private T error;
 
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String code;
     /**
      * 응답 생성 일시
      */
@@ -99,6 +102,14 @@ public class ApiResponse<T> {
         return ApiResponse.<T>builder()
                 .status("error")
                 .message(message)
+                .build();
+    }
+
+    public static <T> ApiResponse<T> fail(String message, String code){
+        return ApiResponse.<T>builder()
+                .status("error")
+                .message(message)
+                .code(code)
                 .build();
     }
 

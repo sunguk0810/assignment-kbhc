@@ -45,12 +45,19 @@ public enum ErrorType {
      */
     INVALID_JSON_FORMAT(500, "C004", "JSON 형식이 유효하지 않습니다."),
 
-
     /**
      * 로그 데이터를 찾을 수 없는 경우
      * <p>HTTP 404 Not Found</p>
      */
     LOG_NOT_FOUND(404, "C005", "로그 데이터를 찾을 수 없습니다."),
+
+
+    /**
+     * 인가되지 않은 행위 등을 한 경우
+     * <p>HTTP 401 Unauthorized</p>
+     */
+    UNAUTHORIZED(401, "C006", ""),
+
     /**
      * 조회하려는 사용자가 존재하지 않는 경우
      * <p>HTTP 404 Not Found</p>
@@ -80,6 +87,12 @@ public enum ErrorType {
      * <p>HTTP 401 Unauthorized</p>
      */
     REFRESH_TOKEN_EXPIRED(401, "U005", "리프레시 토큰이 만료되었습니다."),
+
+    /**
+     * 액세스 토큰의 유효 기간이 만료된 경우 (토큰 재발급 필요)
+     * <p>HTTP 401 Unauthorized</p>
+     */
+    ACCESS_TOKEN_EXPIRED(401, "U006", "액세스 토큰이 만료되었습니다. 토큰을 재발급해주세요."),
 
     ;
 

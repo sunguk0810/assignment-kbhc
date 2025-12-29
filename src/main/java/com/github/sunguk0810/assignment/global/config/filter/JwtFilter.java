@@ -1,5 +1,6 @@
-package com.github.sunguk0810.assignment.global.config.security;
+package com.github.sunguk0810.assignment.global.config.filter;
 
+import com.github.sunguk0810.assignment.global.config.security.TokenProvider;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
@@ -58,6 +59,7 @@ public class JwtFilter extends GenericFilterBean {
         String jwt = resolveToken(request);
         String requestURI = request.getRequestURI();
         log.debug("[JwtFilter] Processing Request URI: {}, JWT Present: {}", requestURI, StringUtils.hasText(jwt));
+
         if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)){
             Authentication authentication = tokenProvider.getAuthentication(jwt);
             SecurityContextHolder.getContext().setAuthentication(authentication);

@@ -1,5 +1,6 @@
 package com.github.sunguk0810.assignment.global.config.security;
 
+import com.github.sunguk0810.assignment.global.config.filter.JwtFilter;
 import com.github.sunguk0810.assignment.global.dto.response.ApiResponse;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,7 +21,7 @@ import java.io.IOException;
  * 클라이언트에게 401 Unauthorized 상태 코드와 공통 에러 포맷(JSON)을 반환합니다.
  * </p>
  *
- * @see com.github.sunguk0810.assignment.global.config.security.JwtFilter
+ * @see JwtFilter
  */
 @Component
 @Slf4j

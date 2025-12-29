@@ -39,10 +39,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<ApiResponse<Void>> handleBusinessException(BusinessException e) {
         ErrorType errorType = e.getErrorType();
-        ApiResponse<Void> response = ApiResponse.fail(errorType.getMessage());
+        ApiResponse<Void> response = ApiResponse.fail(errorType.getMessage(), errorType.getCode());
 
         return ResponseEntity
                 .status(errorType.getStatus())
+
                 .body(response);
     }
 
