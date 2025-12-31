@@ -1,6 +1,7 @@
 package com.github.sunguk0810.assignment.domain.health.dto.measure;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.github.sunguk0810.assignment.domain.health.entity.HealthMeasureSummary;
 import com.github.sunguk0810.assignment.domain.health.entity.common.HealthDetail;
 import com.github.sunguk0810.assignment.domain.health.entity.common.Quantity;
 import lombok.*;
@@ -40,4 +41,9 @@ public class Step extends HealthDetail {
      * <p>일반적인 단위: {@code "kcal"}</p>
      */
     private Quantity calories;
+
+    @Override
+    public void applyTo(HealthMeasureSummary summary) {
+        summary.updateSummary(this);
+    }
 }

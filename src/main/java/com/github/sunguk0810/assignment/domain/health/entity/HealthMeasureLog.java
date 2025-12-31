@@ -1,5 +1,6 @@
 package com.github.sunguk0810.assignment.domain.health.entity;
 
+import com.github.sunguk0810.assignment.domain.auth.entity.User;
 import com.github.sunguk0810.assignment.domain.health.constant.DataSourceType;
 import com.github.sunguk0810.assignment.global.constant.StatusType;
 import com.github.sunguk0810.assignment.global.entity.BaseEntity;
@@ -46,6 +47,12 @@ public class HealthMeasureLog extends BaseEntity {
     private DataSourceType dataSourceType;
 
     /**
+     * 측정을 수행한 사용자와의 연관 관계 ({@link User})
+     */
+    @ManyToOne
+    @JoinColumn(name = "record_key", comment = "사용자 구분 키", nullable = false, foreignKey = @ForeignKey(name = "FK_HEALTH_MEASURE_LOG_RECORD_KEY"))
+    private User userInfo;
+    /**
      * 수집된 원본 데이터 (JSON String)
      */
     @Column(comment = "JSON 원본 데이터", columnDefinition = "JSON")
@@ -77,23 +84,21 @@ public class HealthMeasureLog extends BaseEntity {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         HealthMeasureLog that = (HealthMeasureLog) o;
-        return Objects.equals(measureLogId, that.measureLogId) && dataSourceType == that.dataSourceType && Objects.equals(rawJson, that.rawJson) && status == that.status;
+        return Objects.equals(measureLogId, that.measureLogId) && dataSourceType == that.dataSourceType && Objects.equals(userInfo, that.userInfo) && Objects.equals(rawJson, that.rawJson) && status == that.status;
     }
 
-    /**
-     * 해시코드는 PK 기반으로 생성하되, PK가 null일 경우 상수값을 반환하여
-     * 해시 기반 컬렉션(HashSet 등)에서의 동작을 보장합니다.
-     */
     @Override
     public int hashCode() {
-        return Objects.hash(measureLogId);
+        return Objects.hash(measureLogId, dataSourceType, userInfo, rawJson, status);
     }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", HealthMeasureLog.class.getSimpleName() + "[", "]")
                 .add("measureLogId=" + measureLogId)
                 .add("dataSourceType=" + dataSourceType)
-                .add("rawJson='" + rawJson + "'")
+                .add("userInfo=" + userInfo)
+//                .add("rawJson='" + rawJson + "'")
                 .add("status=" + status)
                 .toString();
     }

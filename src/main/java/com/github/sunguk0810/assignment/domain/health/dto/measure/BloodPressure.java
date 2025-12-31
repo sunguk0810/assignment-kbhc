@@ -1,13 +1,11 @@
 package com.github.sunguk0810.assignment.domain.health.dto.measure;
 
+import com.github.sunguk0810.assignment.domain.health.entity.HealthMeasureSummary;
 import com.github.sunguk0810.assignment.domain.health.entity.common.HealthDetail;
-import com.github.sunguk0810.assignment.domain.health.entity.common.Period;
+
 import com.github.sunguk0810.assignment.domain.health.entity.common.Quantity;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-
-import java.util.Objects;
-import java.util.StringJoiner;
 
 /**
  * 수축기(Systolic), 이완기(Diastolic) 및 평균 동맥압(MAP)을 포함하는 혈압 측정 데이터 클래스입니다.
@@ -37,9 +35,8 @@ public class BloodPressure extends HealthDetail {
      */
     private Quantity diastolic;
 
-    /**
-     * 평균 동맥압 (Mean Arterial Pressure)
-     * <p>한 번의 심장 주기 동안 동맥에 가해지는 평균적인 압력입니다.</p>
-     */
-    private Quantity mean;
+    @Override
+    public void applyTo(HealthMeasureSummary summary) {
+        summary.updateSummary(this);
+    }
 }

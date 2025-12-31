@@ -103,41 +103,18 @@ public class HealthMeasureConsumer {
                         .user(user)
                         .summaryDate(date)
                         .measureType(type)
-                        .sumValue(0.0)
-                        .avgValue(0.0)
-                        .count(0)
-                        .minValue(0.0)
-                        .maxValue(0.0)
+                        .sumSteps(0L)
+                        .sumCalories(0.0)
+                        .sumDistance(0.0)
+                        .avgDiastolic(0L)
+                        .avgBloodSugar(0L)
+                        .avgHeartRate(0L)
+                        .avgOxygenSaturation(0.0)
+                        .count(0L)
                         .build());
 
-        double value = extractValueFromDetail(detail);
-
-        boolean isAccumulate = (type == MeasureType.STEPS);
-
-        summary.updateSummary(value, isAccumulate);
-
+        detail.applyTo(summary);
         summaryRepository.save(summary);
     }
 
-    private double extractValueFromDetail(HealthDetail detail) {
-        if (detail instanceof Step step) {
-            return step.getSteps();
-        } else if (detail instanceof BloodPressure bp) {
-            // 혈압은 수축기 혈압을 사용
-            return getValueFromQuantity(bp.getSystolic());
-        } else if (detail instanceof HeartRate hr) {
-            return getValueFromQuantity(hr.getHeartRate());
-        } else if (detail instanceof OxygenSaturation os) {
-            return getValueFromQuantity(os.getOxygenSaturation());
-        } else if (detail instanceof BloodSugar bs) {
-            return getValueFromQuantity(bs.getBloodSugar());
-        }
-        log.warn("Unknown detail type : {}", detail.getClass());
-        return 0.0;
-    }
-
-    private double getValueFromQuantity(Quantity quantity) {
-        if (quantity != null && quantity.getValue() != null) return quantity.getValue();
-        return 0.0;
-    }
 }

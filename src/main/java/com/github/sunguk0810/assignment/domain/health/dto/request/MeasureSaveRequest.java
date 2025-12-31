@@ -31,10 +31,10 @@ import java.util.List;
 )
 @JsonSubTypes({
         @JsonSubTypes.Type(value = MeasureSaveRequest.StepRequest.class, names = {MeasureType.Values.STEPS, "steps"}),
-        @JsonSubTypes.Type(value = MeasureSaveRequest.BloodPressureRequest.class, names = {MeasureType.Values.BLOOD_PRESSURE, "bloodPressure"}),
-        @JsonSubTypes.Type(value = MeasureSaveRequest.HeartRateRequest.class, names = {MeasureType.Values.HEART_RATE, "heartRate"}),
-        @JsonSubTypes.Type(value = MeasureSaveRequest.OxygenSaturationRequest.class, names = {MeasureType.Values.OXYGEN_SATURATION, "oxygenSaturation"}),
-        @JsonSubTypes.Type(value = MeasureSaveRequest.BloodSugarRequest.class, names = {MeasureType.Values.BLOOD_SUGAR, "bloodSugar"})
+        @JsonSubTypes.Type(value = MeasureSaveRequest.BloodPressureRequest.class, names = {MeasureType.Values.BLOOD_PRESSURE, "blood_pressure"}),
+        @JsonSubTypes.Type(value = MeasureSaveRequest.HeartRateRequest.class, names = {MeasureType.Values.HEART_RATE, "heart_rate"}),
+        @JsonSubTypes.Type(value = MeasureSaveRequest.OxygenSaturationRequest.class, names = {MeasureType.Values.OXYGEN_SATURATION, "oxygen_saturation"}),
+        @JsonSubTypes.Type(value = MeasureSaveRequest.BloodSugarRequest.class, names = {MeasureType.Values.BLOOD_SUGAR, "blood_sugar"})
 })
 @Data
 public class MeasureSaveRequest<T extends HealthDetail> {

@@ -1,4 +1,5 @@
 package com.github.sunguk0810.assignment.domain.health.dto.measure;
+import com.github.sunguk0810.assignment.domain.health.entity.HealthMeasureSummary;
 import com.github.sunguk0810.assignment.domain.health.entity.common.HealthDetail;
 import com.github.sunguk0810.assignment.domain.health.entity.common.Quantity;
 import lombok.*;
@@ -28,4 +29,9 @@ public class HeartRate extends HealthDetail{
      * </p>
      */
     private Quantity heartRate;
+
+    @Override
+    public void applyTo(HealthMeasureSummary summary) {
+        summary.updateSummary(this);
+    }
 }

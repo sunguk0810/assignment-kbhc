@@ -7,9 +7,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface HealthMeasureSummaryRepository extends JpaRepository<HealthMeasureSummary, Long> {
+public interface HealthMeasureSummaryRepository
+        extends JpaRepository<HealthMeasureSummary, Long>, HealthMeasureSummaryRepositoryCustom {
     Optional<HealthMeasureSummary> findByUserAndSummaryDateAndMeasureType(User user, LocalDate summaryDate, MeasureType measureType);
+
+    List<HealthMeasureSummary> findByUserAndMeasureTypeAndSummaryDateBetween(User user, MeasureType measureType, LocalDate startDate, LocalDate endDate);
 }

@@ -1,9 +1,6 @@
 package com.github.sunguk0810.assignment.global.dto.auth;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
@@ -23,6 +20,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @RedisHash(value = "refresh_token", timeToLive = 1209600) // 1209600초 = 14일
 public class TokenInfo {
     /**

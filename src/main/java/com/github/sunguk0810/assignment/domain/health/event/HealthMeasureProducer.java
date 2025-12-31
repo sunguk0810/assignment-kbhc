@@ -1,10 +1,13 @@
 package com.github.sunguk0810.assignment.domain.health.event;
 
+import com.github.sunguk0810.assignment.domain.auth.entity.User;
+import com.github.sunguk0810.assignment.domain.auth.repository.UserRepository;
 import com.github.sunguk0810.assignment.domain.health.constant.DataSourceType;
 import com.github.sunguk0810.assignment.domain.health.dto.device.DeviceInfo;
 import com.github.sunguk0810.assignment.domain.health.dto.event.HealthMeasureEvent;
 import com.github.sunguk0810.assignment.domain.health.dto.request.MeasureSaveRequest;
 import com.github.sunguk0810.assignment.domain.health.entity.HealthMeasureLog;
+import com.github.sunguk0810.assignment.domain.health.entity.common.HealthDetail;
 import com.github.sunguk0810.assignment.domain.health.repository.HealthMeasureLogRepository;
 import com.github.sunguk0810.assignment.global.config.exception.BusinessException;
 import com.github.sunguk0810.assignment.global.constant.ErrorType;
@@ -33,6 +36,7 @@ import java.util.concurrent.CompletableFuture;
 @Slf4j
 public class HealthMeasureProducer {
     private final HealthMeasureLogRepository logRepository;
+    private final UserRepository userRepository;
     private final KafkaTemplate<String, Object> kafkaTemplate;
     private final ObjectMapper objectMapper;
 
@@ -49,16 +53,25 @@ public class HealthMeasureProducer {
      * @throws BusinessException JSON 직렬화 실패 시 발생 (Internal Server Error)
      */
     @Transactional
-    public void saveLogAndProduce(String recordKey, MeasureSaveRequest request){
+    public void saveLogAndProduce(String recordKey, MeasureSaveRequest<? extends HealthDetail> request){
         try  {
+            // recordKey가 users 테이블에 존재하는지 체크한다.
+
+
             String rawJson = objectMapper.writeValueAsString(request);
 
-            MeasureSaveRequest.Data data = request.getData();
+            MeasureSaveRequest.Data<? extends HealthDetail> data = request.getData();
+
+            User userInfo = User.builder()
+                    .recordKey(recordKey)
+                    .build();
+
             DeviceInfo deviceInfo = data.getSource();
 
             DataSourceType dataSourceType = DataSourceType.from(deviceInfo.getName());
 
             HealthMeasureLog measureLog = HealthMeasureLog.builder()
+                    .userInfo(userInfo)
                     .rawJson(rawJson)
                     .dataSourceType(dataSourceType)
                     .status(StatusType.PENDING)

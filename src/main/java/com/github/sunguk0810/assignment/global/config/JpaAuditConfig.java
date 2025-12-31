@@ -1,6 +1,7 @@
 package com.github.sunguk0810.assignment.global.config;
 
 import com.github.sunguk0810.assignment.domain.auth.entity.User;
+import com.github.sunguk0810.assignment.global.dto.auth.CustomUserDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,6 +44,12 @@ public class JpaAuditConfig {
                 return Optional.of("ANONYMOUS");
             }
 
+
+            if (authentication.getPrincipal() instanceof CustomUserDetails userDetails){
+                if (userDetails.getUser() != null){
+                 return Optional.of(userDetails.getUser().getRecordKey());
+                }
+            }
             if (authentication.getPrincipal() instanceof User user) {
                 log.info("User = {}", user);
                 return Optional.of(user.getRecordKey());

@@ -1,5 +1,6 @@
 package com.github.sunguk0810.assignment.domain.health.entity.common;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -18,7 +19,7 @@ import lombok.NoArgsConstructor;
 public class Quantity {
     /**
      * 측정값의 단위
-     * <p>예: {@code "m"}, {@code "kg"}, {@code "mmHg"}, {@code "steps"}</p>
+     * <p>예: {@code "m"}, {@code "kg"}, {@code "mmHg"}</p>
      */
     private String unit;
 
@@ -38,5 +39,12 @@ public class Quantity {
     public Quantity(String unit, Double value) {
         this.unit = unit;
         this.value = value;
+    }
+
+
+    @JsonIgnore
+    public static Double getValueFromQuantity(Quantity quantity){
+        if (quantity != null && quantity.getValue() != null) return quantity.getValue();
+        return 0.0;
     }
 }

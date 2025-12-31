@@ -1,5 +1,6 @@
 package com.github.sunguk0810.assignment.global.config.security;
 
+import com.github.sunguk0810.assignment.domain.auth.constant.RoleType;
 import com.github.sunguk0810.assignment.domain.auth.dto.response.TokenResponse;
 import com.github.sunguk0810.assignment.domain.auth.entity.User;
 import com.github.sunguk0810.assignment.domain.auth.entity.UserProfile;
@@ -175,13 +176,28 @@ public class TokenProvider implements InitializingBean {
         Collection<? extends GrantedAuthority> authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(claims.get(AUTHORITIES_KEY).toString());
         String recordKey = claims.get("recordKey", String.class);
         String username = claims.get("username", String.class);
+        
+        // 권한 정보에서 RoleType 추출 (첫 번째 권한 사용)
+        RoleType roleType = RoleType.ROLE_USER; // 기본값
+        if (!authorities.isEmpty()) {
+            try {
+                String roleName = authorities.iterator().next().getAuthority();
+                roleType = RoleType.valueOf(roleName);
+            } catch (IllegalArgumentException e) {
+                log.warn("Invalid RoleType in token: {}", authorities);
+            }
+        }
 
         User principal = User.builder()
                 .email(claims.getSubject())
                 .recordKey(recordKey)
                 .username(username)
+                .roleType(roleType)
                 .build();
-        return new UsernamePasswordAuthenticationToken(principal, token, authorities);
+                
+        CustomUserDetails customUserDetails = new CustomUserDetails(principal);
+        
+        return new UsernamePasswordAuthenticationToken(customUserDetails, token, authorities);
     }
 
     /**
