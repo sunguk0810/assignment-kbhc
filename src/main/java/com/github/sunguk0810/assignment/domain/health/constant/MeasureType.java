@@ -1,8 +1,9 @@
 package com.github.sunguk0810.assignment.domain.health.constant;
 
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.github.sunguk0810.assignment.global.config.exception.BusinessException;
+import com.github.sunguk0810.assignment.global.constant.ErrorType;
 
 import java.util.Arrays;
 
@@ -80,7 +81,7 @@ public enum MeasureType {
       return Arrays.stream(MeasureType.values())
                 .filter(v -> v.getType().equalsIgnoreCase(value))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("알 수 없는 타입입니다."));
+                .orElseThrow(() -> new BusinessException(ErrorType.INVALID_PARAMETER));
     }
 
     MeasureType(String type) {
@@ -95,6 +96,4 @@ public enum MeasureType {
         public static final String HEART_RATE = "HEART_RATE";
         public static final String EXERCISE = "EXERCISE";
     }
-
-
 }
