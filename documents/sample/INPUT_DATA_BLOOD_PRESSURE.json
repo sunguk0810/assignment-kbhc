@@ -1,0 +1,1026 @@
+{
+    "recordkey": "7836887b-b12a-440f-af0f-851546504b13",
+    "data": {
+        "entries": [
+            {
+                "period": {
+                    "from": "2024-11-01 10:40:00",
+                    "to": "2024-11-01 10:45:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 119
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 87
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-01 15:34:00",
+                    "to": "2024-11-01 15:39:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 113
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 87
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-01 20:46:00",
+                    "to": "2024-11-01 20:51:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 122
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 89
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-02 10:49:00",
+                    "to": "2024-11-02 10:54:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 129
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 85
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-02 13:32:00",
+                    "to": "2024-11-02 13:37:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 121
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 78
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-03 10:18:00",
+                    "to": "2024-11-03 10:23:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 134
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 79
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-03 13:05:00",
+                    "to": "2024-11-03 13:10:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 127
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 81
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-04 08:34:00",
+                    "to": "2024-11-04 08:39:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 112
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 76
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-04 14:20:00",
+                    "to": "2024-11-04 14:25:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 131
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 75
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-05 10:10:00",
+                    "to": "2024-11-05 10:15:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 133
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 85
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-05 13:52:00",
+                    "to": "2024-11-05 13:57:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 122
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 89
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-05 19:43:00",
+                    "to": "2024-11-05 19:48:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 112
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 76
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-06 09:42:00",
+                    "to": "2024-11-06 09:47:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 118
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 76
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-06 13:05:00",
+                    "to": "2024-11-06 13:10:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 117
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 84
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-07 09:43:00",
+                    "to": "2024-11-07 09:48:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 135
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 88
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-07 15:43:00",
+                    "to": "2024-11-07 15:48:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 110
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 87
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-07 19:19:00",
+                    "to": "2024-11-07 19:24:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 115
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 86
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-08 09:43:00",
+                    "to": "2024-11-08 09:48:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 125
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 81
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-08 13:40:00",
+                    "to": "2024-11-08 13:45:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 110
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 78
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-08 20:58:00",
+                    "to": "2024-11-08 21:03:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 133
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 85
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-09 08:49:00",
+                    "to": "2024-11-09 08:54:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 126
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 81
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-09 14:04:00",
+                    "to": "2024-11-09 14:09:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 110
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 83
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-09 20:48:00",
+                    "to": "2024-11-09 20:53:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 130
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 80
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-10 08:08:00",
+                    "to": "2024-11-10 08:13:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 111
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 90
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-10 13:46:00",
+                    "to": "2024-11-10 13:51:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 133
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 82
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-11 09:26:00",
+                    "to": "2024-11-11 09:31:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 111
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 78
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-11 14:36:00",
+                    "to": "2024-11-11 14:41:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 121
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 88
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-11 19:03:00",
+                    "to": "2024-11-11 19:08:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 133
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 90
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-12 10:29:00",
+                    "to": "2024-11-12 10:34:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 119
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 79
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-12 15:51:00",
+                    "to": "2024-11-12 15:56:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 133
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 88
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-12 19:26:00",
+                    "to": "2024-11-12 19:31:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 111
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 85
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-13 08:27:00",
+                    "to": "2024-11-13 08:32:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 119
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 80
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-13 14:50:00",
+                    "to": "2024-11-13 14:55:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 118
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 70
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-14 08:06:00",
+                    "to": "2024-11-14 08:11:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 121
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 83
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-14 14:14:00",
+                    "to": "2024-11-14 14:19:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 131
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 73
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-15 10:48:00",
+                    "to": "2024-11-15 10:53:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 129
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 79
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-15 15:23:00",
+                    "to": "2024-11-15 15:28:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 133
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 88
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-16 09:41:00",
+                    "to": "2024-11-16 09:46:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 116
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 75
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-16 15:30:00",
+                    "to": "2024-11-16 15:35:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 130
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 84
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-17 09:20:00",
+                    "to": "2024-11-17 09:25:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 110
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 74
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-17 15:14:00",
+                    "to": "2024-11-17 15:19:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 114
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 73
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-18 10:11:00",
+                    "to": "2024-11-18 10:16:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 133
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 78
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-18 13:37:00",
+                    "to": "2024-11-18 13:42:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 133
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 71
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-19 09:34:00",
+                    "to": "2024-11-19 09:39:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 127
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 81
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-19 14:08:00",
+                    "to": "2024-11-19 14:13:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 124
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 84
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-20 09:39:00",
+                    "to": "2024-11-20 09:44:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 113
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 86
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-20 13:52:00",
+                    "to": "2024-11-20 13:57:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 111
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 75
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-21 10:52:00",
+                    "to": "2024-11-21 10:57:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 110
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 75
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-21 14:09:00",
+                    "to": "2024-11-21 14:14:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 129
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 70
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-21 21:18:00",
+                    "to": "2024-11-21 21:23:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 114
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 76
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-22 08:12:00",
+                    "to": "2024-11-22 08:17:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 117
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 79
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-22 14:55:00",
+                    "to": "2024-11-22 15:00:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 119
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 72
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-23 08:50:00",
+                    "to": "2024-11-23 08:55:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 124
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 75
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-23 14:32:00",
+                    "to": "2024-11-23 14:37:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 121
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 75
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-23 20:51:00",
+                    "to": "2024-11-23 20:56:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 119
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 89
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-24 09:57:00",
+                    "to": "2024-11-24 10:02:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 110
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 90
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-24 13:59:00",
+                    "to": "2024-11-24 14:04:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 117
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 70
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-25 08:28:00",
+                    "to": "2024-11-25 08:33:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 134
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 89
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-25 15:41:00",
+                    "to": "2024-11-25 15:46:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 116
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 73
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-26 09:24:00",
+                    "to": "2024-11-26 09:29:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 117
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 81
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-26 14:47:00",
+                    "to": "2024-11-26 14:52:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 117
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 74
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-26 20:55:00",
+                    "to": "2024-11-26 21:00:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 127
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 83
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-27 08:51:00",
+                    "to": "2024-11-27 08:56:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 117
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 71
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-27 14:03:00",
+                    "to": "2024-11-27 14:08:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 128
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 84
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-27 19:56:00",
+                    "to": "2024-11-27 20:01:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 133
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 90
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-28 08:46:00",
+                    "to": "2024-11-28 08:51:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 131
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 74
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-28 15:21:00",
+                    "to": "2024-11-28 15:26:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 123
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 86
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-28 19:02:00",
+                    "to": "2024-11-28 19:07:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 120
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 71
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-29 10:46:00",
+                    "to": "2024-11-29 10:51:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 110
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 82
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-29 13:30:00",
+                    "to": "2024-11-29 13:35:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 119
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 74
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-30 10:38:00",
+                    "to": "2024-11-30 10:43:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 118
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 85
+                }
+            },
+            {
+                "period": {
+                    "from": "2024-11-30 13:55:00",
+                    "to": "2024-11-30 14:00:00"
+                },
+                "systolic": {
+                    "unit": "mmHg",
+                    "value": 121
+                },
+                "diastolic": {
+                    "unit": "mmHg",
+                    "value": 82
+                }
+            }
+        ],
+        "source": {
+            "mode": 9,
+            "product": {
+                "name": "Android",
+                "vender": "Samsung"
+            },
+            "name": "SamsungHealth",
+            "type": ""
+        }
+    },
+    "lastUpdate": "2024-12-16 14:40:00 +0000",
+    "type": "blood_pressure"
+}
