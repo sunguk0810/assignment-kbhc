@@ -9,7 +9,7 @@ services:
       - "13306:3306"
     volumes:
       - ./data/db/mysql/data:/var/lib/mysql
-      - ./data/db/mysql/init:/docker-entrypoint-initdb.d
+#      - ./data/db/mysql/init:/docker-entrypoint-initdb.d
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       MYSQL_USER: kbhc

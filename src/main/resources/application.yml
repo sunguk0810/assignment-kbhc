@@ -20,7 +20,7 @@ spring:
     password: kbhc123qwe!
   jpa:
     hibernate:
-      ddl-auto: update # 개발 환경에선 update, 운영에선 none
+      ddl-auto: none # 개발 환경에선 update, 운영에선 none
     show-sql: true
     properties:
       hibernate:
