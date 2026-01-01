@@ -38,15 +38,15 @@
 
 ## 기술 스택 (Tech Stack)
 
-| Category | Technology | Version |
-| :--- | :--- | :--- |
-| **Language** | Java | 17 |
-| **Framework** | Spring Boot | 4.0.1 |
-| **Database** | MySQL | 8.0 |
-| **Cache** | Redis | 7.x |
-| **Message Queue** | Apache Kafka | 3.x |
-| **Build Tool** | Gradle | 8.x (Kotlin DSL) |
-| **Container** | Docker / Docker Compose | - |
+| Category | Technology | Version          |
+| :--- | :--- |:-----------------|
+| **Language** | Java | 17               |
+| **Framework** | Spring Boot | 4.0.1            |
+| **Database** | MySQL | 8.0              |
+| **Cache** | Redis | 7.x              |
+| **Message Queue** | Apache Kafka | 3.x              |
+| **Build Tool** | Gradle | 9.x (Kotlin DSL) |
+| **Container** | Docker / Docker Compose | -                |
 
 ---
 
