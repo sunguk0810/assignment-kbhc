@@ -113,16 +113,16 @@ src/main/java/com/github/sunguk0810/assignment
 
 ## 4. 기술 스택 및 버전 (Tech Stack)
 
-| 구분 | 기술 | 버전 | 비고 |
-| :--- | :--- | :--- | :--- |
-| **Language** | Java | 17 | LTS 버전 사용 |
-| **Framework** | Spring Boot | 4.0.1 | (가상의 최신 버전) |
-| **Build Tool** | Gradle | 8.x | Kotlin DSL 사용 |
-| **Database** | MySQL | 8.0 | JSON Type 지원 활용 |
+| 구분 | 기술 | 버전 | 비고               |
+| :--- | :--- | :--- |:-----------------|
+| **Language** | Java | 17 | LTS 버전 사용        |
+| **Framework** | Spring Boot | 4.0.1 |                  |
+| **Build Tool** | Gradle | 8.x | Kotlin DSL 사용    |
+| **Database** | MySQL | 8.0 | JSON Type 지원 활용  |
 | **Cache** | Redis | 7.x | Refresh Token 저장소 |
-| **Message Queue** | Apache Kafka | 3.x | 비동기 이벤트 처리 |
-| **ORM** | Spring Data JPA | - | 기본 데이터 접근 |
-| **Security** | Spring Security | 6.x | JWT 기반 인증 |
+| **Message Queue** | Apache Kafka | 3.x | 비동기 이벤트 처리       |
+| **ORM** | Spring Data JPA | - | 기본 데이터 접근        |
+| **Security** | Spring Security | 6.x | JWT 기반 인증        |
 
 ---
 
