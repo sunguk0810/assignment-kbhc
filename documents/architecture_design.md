@@ -1,8 +1,8 @@
-# 프로젝트 구조 및 아키텍처 설계서 (Project Structure & Architecture Design)
+# 프로젝트 구조 및 아키텍처 설계서
 
-## 1. 아키텍처 개요 (Architecture Overview)
+## 1. 아키텍처 개요
 
-본 프로젝트는 대용량 건강 데이터의 수집, 처리, 조회를 효율적으로 수행하기 위해 **이벤트 기반 아키텍처(Event-Driven Architecture)**와 **계층형 아키텍처(Layered Architecture)**를 혼합하여 설계되었습니다.
+본 프로젝트는 대용량 건강 데이터의 수집, 처리, 조회를 효율적으로 수행하기 위해 **이벤트 기반 아키텍처(Event-Driven Architecture)** 와 **계층형 아키텍처(Layered Architecture)** 를 혼합하여 설계되었습니다.
 
 ### 1.1. 시스템 구성도
 ```mermaid
@@ -77,32 +77,30 @@ src/main/java/com/github/sunguk0810/assignment
 │   └── util                     // 유틸리티 클래스
 └── resources
     ├── application.yml          // 애플리케이션 설정
-    └── logback-spring.xml       // 로깅 설정
 ```
-
 ---
 
 ## 3. 데이터 파이프라인 흐름 (Data Pipeline Flow)
 
 건강 데이터가 수집되어 통계에 반영되기까지의 흐름입니다.
 
-1.  **데이터 수신 (Ingestion)**
+1.  **데이터 수신**
     *   API: `POST /api/v1/health/measure`
     *   동작:
         1.  `HealthMeasureLog` 테이블에 Raw JSON 상태로 저장 (`PENDING`).
         2.  `health-measure-topic`으로 Kafka 메시지 발행 (Payload: Log ID).
         3.  Client에게 `200 OK` 응답 반환.
 
-2.  **데이터 처리 (Processing)**
+2.  **데이터 처리**
     *   Component: `HealthMeasureConsumer`
     *   동작:
         1.  Kafka 메시지 수신 (Log ID).
         2.  `HealthMeasureLog` 조회 및 JSON 파싱.
         3.  `HealthMeasureInfo` 테이블에 상세 데이터 저장 (중복 시 무시 - `INSERT IGNORE`).
-        4.  `HealthMeasureSummary` 테이블의 일별 통계 데이터 갱신 (Upsert / Dirty Checking).
+        4.  `HealthMeasureSummary` 테이블의 일별 통계 데이터 갱신.
         5.  성공 시 Log 상태를 `DONE`으로 업데이트, 실패 시 `ERROR`로 업데이트.
 
-3.  **데이터 조회 (Serving)**
+3.  **데이터 조회**
     *   API: `GET /api/v1/health/measure`
     *   동작:
         1.  요청 파라미터(`type`, `date`) 검증.

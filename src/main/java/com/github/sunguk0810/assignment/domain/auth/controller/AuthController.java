@@ -25,6 +25,13 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 
 
+/**
+ * 인증 및 회원 관리를 위한 REST 컨트롤러입니다.
+ * <p>
+ * 회원가입, 로그인, 토큰 갱신, 로그아웃 등
+ * 사용자의 계정 인증과 관련된 기능을 제공합니다.
+ * </p>
+ */
 @RestController
 @RequiredArgsConstructor
 @Slf4j
@@ -36,11 +43,12 @@ public class AuthController {
     /**
      * 신규 회원 가입을 처리합니다.
      * <p>
-     * [POST] /api/v1/auth/register
+     * 사용자의 이메일, 비밀번호 및 프로필 정보를 입력받아
+     * 새로운 계정을 생성하고 고유 식별 키(Record Key)를 발급합니다.
      * </p>
      *
-     * @param request 회원가입에 필요한 정보(이메일, 비밀번호, 프로필 등)
-     * @return 가입된 사용자의 식별 키(Record Key)와 성공 메시지
+     * @param request 회원가입에 필요한 정보 (이메일, 비밀번호, 성별, 생년월일 등)
+     * @return 생성된 사용자의 고유 식별 키 (UUID)
      */
     @PostMapping("register")
     public ApiResponse<String> register(@RequestBody @Valid UserRegisterRequest request){
@@ -49,16 +57,15 @@ public class AuthController {
     }
 
     /**
-     * 사용자 로그인 및 인증 토큰 발급을 처리합니다.
+     * 사용자 인증을 수행하고 JWT 토큰을 발급합니다.
      * <p>
-     * [POST] /api/v1/auth/login<br>
-     * 인증 성공 시 액세스 토큰과 리프레시 토큰을 응답 바디에 포함하며,
-     * 편의를 위해 Authorization 헤더에도 액세스 토큰을 추가합니다.
+     * 이메일과 비밀번호를 검증하여 유효한 사용자인 경우,
+     * 액세스 토큰(Access Token)과 리프레시 토큰(Refresh Token)을 반환합니다.
      * </p>
      *
-     * @param request  로그인 요청 정보(이메일, 비밀번호)
-     * @param response HTTP 응답 객체 (헤더 설정용)
-     * @return 액세스 토큰 및 리프레시 토큰 정보
+     * @param request  로그인 요청 정보 (이메일, 비밀번호)
+     * @param response HTTP 응답 객체 (Authorization 헤더 설정을 위해 사용)
+     * @return 발급된 토큰 세트 (액세스 토큰 및 리프레시 토큰)
      */
     @PostMapping("login")
     public ApiResponse<AuthTokenResponse> login(@Valid @RequestBody UserLoginRequest request, HttpServletResponse response){
@@ -69,13 +76,13 @@ public class AuthController {
     }
 
     /**
-     * 액세스 토큰 만료 시 리프레시 토큰을 사용하여 토큰을 재발급합니다.
+     * 만료된 액세스 토큰을 리프레시 토큰을 사용하여 재발급합니다.
      * <p>
-     * [POST] /api/v1/auth/refresh-token
+     * 유효한 리프레시 토큰이 확인되면 새로운 액세스 토큰을 생성하여 반환합니다.
      * </p>
      *
-     * @param request 리프레시 토큰을 포함한 요청 객체
-     * @return 새로 발급된 액세스 토큰 정보
+     * @param request 리프레시 토큰 정보를 담은 DTO
+     * @return 새로 생성된 액세스 토큰
      */
     @PostMapping("refresh-token")
     public ApiResponse<TokenResponse> refreshToken(@Valid @RequestBody RefreshTokenRequest request){
@@ -84,13 +91,15 @@ public class AuthController {
     }
 
     /**
-     * 로그아웃 처리를 수행합니다. (리프레시 토큰 무효화)
+     * 사용자의 로그아웃 처리를 수행합니다.
      * <p>
-     * [POST] /api/v1/auth/logout<br>
-     * 서버 측 Redis에 저장된 리프레시 토큰을 삭제하여 더 이상 토큰 갱신이 불가능하게 만듭니다.
+     * 서버에 저장된 리프레시 토큰을 무효화하여 더 이상 토큰 갱신이 불가능하도록 처리합니다.
      * </p>
      *
-     * @return 데이터 없는 성공 응답
+     * @param request   리프레시 토큰 정보를 포함한 로그아웃 요청 DTO
+     * @param principal 현재 인증된 사용자의 Principal 객체
+     * @return 성공 메시지
+     * @throws BusinessException {@link ErrorType#USER_NOT_FOUND} 인증 정보가 없는 경우 발생
      */
     @PostMapping("logout")
     public ApiResponse<Void> logout(@RequestBody @Valid LogoutRequest request, Principal principal){

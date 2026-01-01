@@ -34,9 +34,9 @@ API 요청/응답 객체(DTO)와 데이터베이스 객체(Entity)를 엄격하�
 - **해결 (CQRS 패턴 적용)**:
   - **쓰기 모델(Command)**: 원본 로그는 `HealthMeasureLog`에 빠르게 적재.
   - **읽기 모델(Query)**: 데이터 수신 시점(Kafka Consumer)에 비동기로 통계 데이터를 미리 계산(Pre-aggregation)하여 `HealthMeasureSummary` 테이블에 저장.
-  - 조회 API는 별도의 연산 없이 `HealthMeasureSummary` 테이블만 단순 조회하므로, 데이터 양이 늘어나도 **O(1)**에 가까운 일정한 응답 속도 보장.
+  - 조회 API는 별도의 연산 없이 `HealthMeasureSummary` 테이블만 단순 조회하므로, 데이터 양이 늘어나도 일정한 응답 속도 보장.
 
-### 이슈 3: 중복 데이터 유입 처리 (Idempotency)
+### 이슈 3: 중복 데이터 유입 처리
 - **상황**: 네트워크 불안정이나 클라이언트 로직 오류로 인해 동일한 측정 데이터가 중복 전송될 가능성 존재.
 - **해결**:
   - `HealthMeasureInfo` 테이블에 `(record_key, measure_type, from_date, to_date)` 조합으로 **Unique Index** 설정.
@@ -45,7 +45,7 @@ API 요청/응답 객체(DTO)와 데이터베이스 객체(Entity)를 엄격하�
 
 ---
 
-## 5. 추가 이슈 해결 사례 및 기술적 고민 (Technical Challenges)
+## 5. 추가 이슈 해결 사례 및 기술적 고민
 
 개발 과정에서 마주친 구체적인 기술적 문제들과 그 해결 과정을 정리했습니다.
 
@@ -57,9 +57,6 @@ API 요청/응답 객체(DTO)와 데이터베이스 객체(Entity)를 엄격하�
 - **상황**: 측정 타입(`STEPS`, `BLOOD_PRESSURE` 등)에 따라 조회해야 할 컬럼(`SUM(steps)` vs `AVG(systolic)`)이 달라져 정적 쿼리(`@Query`)로 처리 불가.
 - **해결**: Java 코드 레벨에서 `switch` 문을 활용해 **쿼리 조각(Fragment)**을 생성하고, `String.format`으로 최종 SQL을 조립하는 동적 SQL 방식 적용.
 
-### 5.3. 비동기 스레드(Kafka Consumer)에서의 JPA Auditing
-- **상황**: Kafka Consumer가 데이터를 저장할 때, `SecurityContext`가 비어있어 `@CreatedBy`가 `ANONYMOUS`로 기록됨.
-- **해결**: Consumer 로직 내에서 이벤트에 포함된 사용자 정보를 기반으로 임시 `Authentication` 객체를 생성하여 `SecurityContext`에 주입 후 저장 로직 수행.
 
 ---
 
@@ -84,5 +81,6 @@ API 요청/응답 객체(DTO)와 데이터베이스 객체(Entity)를 엄격하�
   - `BusinessException`: 의도된 비즈니스 로직 에러.
   - `MethodArgumentNotValidException`: `@Valid` 검증 실패 시 필드별 상세 에러 메시지 반환.
   - `Exception`: 예측하지 못한 서버 내부 오류(500)에 대한 안전망.
+
 
 
