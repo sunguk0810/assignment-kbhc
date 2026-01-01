@@ -15,6 +15,7 @@
 *   **[API 명세서 (API Spec)](documents/api_specification.md)**: REST API 엔드포인트 및 요청/응답 예시
 *   **[구현 상세 및 트러블슈팅 (Implementation)](documents/implementation_details.md)**: 핵심 구현 전략, 주요 이슈 해결 과정 및 데이터 필드 상세
 *   **[데이터베이스 조회 결과 보고서 (Query Report)](documents/database_query_results.md)**: 요구사항에 따른 SQL 쿼리 실행 결과 및 분석
+*   **[테스트 시나리오 (Test Scenarios)](documents/test_scenarios.md)**: 핵심 비즈니스 로직 검증을 위한 테스트 케이스 정의 및 절차
 
 ---
 

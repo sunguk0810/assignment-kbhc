@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,10 +60,10 @@ public class HealthServiceImpl implements HealthService {
      * </ul>
      */
     @Override
-    public List<HealthSummaryResponse> getSummaries(String userRecordKey, MeasureSummaryRequest request) {
+    public List<HealthSummaryResponse> getSummaries(String recordKey, MeasureSummaryRequest request) {
 
 
-        User user = userRepository.findById(userRecordKey)
+        User user = userRepository.findById(recordKey)
                 .orElseThrow(() -> new BusinessException(ErrorType.USER_NOT_FOUND));
 
         MeasureType type = request.getType();

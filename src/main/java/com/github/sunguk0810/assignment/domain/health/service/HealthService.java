@@ -20,10 +20,10 @@ public interface HealthService {
      * 요약된 건강 데이터를 반환합니다.
      * </p>
      *
-     * @param userRecordKey 조회할 사용자의 고유 식별키 (UUID)
+     * @param recordKey 조회할 사용자의 고유 식별키 (UUID)
      * @param request       조회 조건이 담긴 요청 DTO (측정 타입, 기간, 집계 방식 등)
      * @return 조회된 건강 요약 정보 리스트 ({@link HealthSummaryResponse}의 구현체 목록)
      */
-    List<HealthSummaryResponse> getSummaries(String userRecordKey, MeasureSummaryRequest request);
+    List<HealthSummaryResponse> getSummaries(String recordKey, MeasureSummaryRequest request);
 
 }
