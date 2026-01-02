@@ -4,6 +4,7 @@ import com.github.sunguk0810.assignment.domain.health.entity.HealthMeasureSummar
 import com.github.sunguk0810.assignment.domain.health.entity.common.HealthDetail;
 
 import com.github.sunguk0810.assignment.domain.health.entity.common.Quantity;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -22,17 +23,20 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
+@Schema(description = "혈압")
 public class BloodPressure extends HealthDetail {
     /**
      * 수축기 혈압 (Systolic Blood Pressure)
      * <p>심장이 수축하여 혈액을 내보낼 때 혈관에 가해지는 가장 높은 압력입니다.</p>
      */
+    @Schema(description = "수축기 혈압 (단위 : mmHg)")
     private Quantity systolic;
 
     /**
      * 이완기 혈압 (Diastolic Blood Pressure)
      * <p>심장이 이완되어 혈액을 채울 때 혈관에 남아있는 가장 낮은 압력입니다.</p>
      */
+    @Schema(description = "이완기 혈압 (단위 : mmHg)")
     private Quantity diastolic;
 
     @Override

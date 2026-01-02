@@ -1,5 +1,6 @@
 package com.github.sunguk0810.assignment.domain.auth.dto.response;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 /**
@@ -15,11 +16,13 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
+@Schema(description = "액세스 토큰 응답 DTO")
 public class TokenResponse {
     /**
      * 생성된 JWT 토큰 문자열
      * <p>액세스 토큰 또는 리프레시 토큰의 원문(Raw String)입니다.</p>
      */
+    @Schema(description = "액세스 토큰")
     private String token;
 
     /**
@@ -30,5 +33,6 @@ public class TokenResponse {
      * 클라이언트 응답(OAuth2 표준)으로 변환 시 <b>초(s)</b> 단위로 변환이 필요할 수 있습니다.
      * </p>
      */
+    @Schema(description = "토큰 유효 시간 (단위 : 초)")
     private Long expiresIn;
 }

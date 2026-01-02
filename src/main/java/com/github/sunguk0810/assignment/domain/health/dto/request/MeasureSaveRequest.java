@@ -5,6 +5,7 @@ import com.github.sunguk0810.assignment.domain.health.constant.MeasureType;
 import com.github.sunguk0810.assignment.domain.health.dto.device.DeviceInfo;
 import com.github.sunguk0810.assignment.domain.health.dto.measure.*;
 import com.github.sunguk0810.assignment.domain.health.entity.common.HealthDetail;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -37,13 +38,15 @@ import java.util.List;
         @JsonSubTypes.Type(value = MeasureSaveRequest.BloodSugarRequest.class, names = {MeasureType.Values.BLOOD_SUGAR, "blood_sugar"})
 })
 @Data
+@Schema(description = "측정 정보 저장 요청 DTO")
 public class MeasureSaveRequest<T extends HealthDetail> {
     /**
      * 해당 측정 데이터의 고유 식별 키
      */
     @JsonProperty("recordKey")
     @JsonAlias({"record_key", "recordKey", "recordkey"})
-    @NotNull(message = "측정 데이터 고유 식별 키는 필수입니다.")
+    @NotNull(message = "측정 데이터 사용자 구분 키는 필수입니다.")
+    @Schema(description = "사용자 구분 키")
     private String recordKey;
 
     /**
@@ -51,12 +54,14 @@ public class MeasureSaveRequest<T extends HealthDetail> {
      * @see MeasureType
      */
     @NotNull(message = "측정 데이터 유형은 필수입니다.")
+    @Schema(description = "데이터 유형", examples = {"steps", "oxygenSaturation"})
     private MeasureType type;
 
     /**
      * 실제 측정 데이터값, 메모, 장치 정보를 포함하는 상세 데이터 객체
      */
     @NotNull(message = "측정 데이터는 필수입니다.")
+    @Schema(description = "측정 데이터")
     private MeasureSaveRequest.Data<T> data;
 
     /**
@@ -65,6 +70,7 @@ public class MeasureSaveRequest<T extends HealthDetail> {
      */
     @NotNull(message = "데이터 최종 수정 일시는 필수입니다.")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss Z")
+    @Schema(description = "최종수정일시")
     private ZonedDateTime lastUpdate;
 
 

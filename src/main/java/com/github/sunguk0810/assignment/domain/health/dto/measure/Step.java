@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.github.sunguk0810.assignment.domain.health.entity.HealthMeasureSummary;
 import com.github.sunguk0810.assignment.domain.health.entity.common.HealthDetail;
 import com.github.sunguk0810.assignment.domain.health.entity.common.Quantity;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -22,24 +23,28 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
+@Schema(description = "걸음 수")
 public class Step extends HealthDetail {
     /**
      * 측정된 총 걸음 횟수
      * <p>단위: {@code count}</p>
      */
     @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @Schema(description = "걸음 수", example= "8000")
     private Double steps;
 
     /**
      * 이동 거리 데이터
      * <p>일반적인 단위: {@code "m"} (미터) 또는 {@code "km"} (킬로미터)</p>
      */
+    @Schema(description = "거리 수치")
     private Quantity distance;
 
     /**
      * 소모 칼로리 데이터
      * <p>일반적인 단위: {@code "kcal"}</p>
      */
+    @Schema(description = "칼로리 수치")
     private Quantity calories;
 
     @Override

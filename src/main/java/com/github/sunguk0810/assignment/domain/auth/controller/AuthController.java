@@ -13,6 +13,8 @@ import com.github.sunguk0810.assignment.global.config.exception.BusinessExceptio
 import com.github.sunguk0810.assignment.global.constant.ErrorType;
 import com.github.sunguk0810.assignment.global.dto.auth.CustomUserDetails;
 import com.github.sunguk0810.assignment.global.dto.response.ApiResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +38,7 @@ import java.security.Principal;
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/api/v1/auth")
+@Tag(name = "Auth", description = "인증/인가 API")
 public class AuthController {
     private final UserService userService;
     private final AuthService authService;
@@ -51,6 +54,7 @@ public class AuthController {
      * @return 생성된 사용자의 고유 식별 키 (UUID)
      */
     @PostMapping("register")
+    @Operation(summary = "회원가입", description = "신규 사용자를 등록합니다.")
     public ApiResponse<String> register(@RequestBody @Valid UserRegisterRequest request){
         String recordKey = userService.register(request);
         return ApiResponse.success(recordKey, "회원가입이 성공적으로 완료되었습니다.");
@@ -68,6 +72,7 @@ public class AuthController {
      * @return 발급된 토큰 세트 (액세스 토큰 및 리프레시 토큰)
      */
     @PostMapping("login")
+    @Operation(summary = "로그인", description = "이메일과 비밀번호로 인증하고 토큰을 발급받습니다.")
     public ApiResponse<AuthTokenResponse> login(@Valid @RequestBody UserLoginRequest request, HttpServletResponse response){
         log.info("[Login Request] email: {}", request.getEmail());
         AuthTokenResponse tokenResponse = authService.login(request);
@@ -85,6 +90,7 @@ public class AuthController {
      * @return 새로 생성된 액세스 토큰
      */
     @PostMapping("refresh-token")
+    @Operation(summary = "토큰 재발급", description = "만료된 Access Token을 Refresh Token을 통해 갱신합니다.")
     public ApiResponse<TokenResponse> refreshToken(@Valid @RequestBody RefreshTokenRequest request){
         TokenResponse tokenResponse = authService.refresh(request);
         return ApiResponse.success(tokenResponse, "토큰이 갱신되었습니다.");
@@ -102,6 +108,7 @@ public class AuthController {
      * @throws BusinessException {@link ErrorType#USER_NOT_FOUND} 인증 정보가 없는 경우 발생
      */
     @PostMapping("logout")
+    @Operation(summary = "로그아웃", description = "Refresh Token을 무효화하여 로그아웃 처리합니다.")
     public ApiResponse<Void> logout(@RequestBody @Valid LogoutRequest request, Principal principal){
         if (principal == null){
             throw new BusinessException(ErrorType.USER_NOT_FOUND);

@@ -1,6 +1,7 @@
 package com.github.sunguk0810.assignment.domain.auth.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 /**
@@ -14,6 +15,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
+@Schema(description = "인증 토큰 응답 DTO")
 public class AuthTokenResponse {
     /**
      * API 리소스 접근을 위한 액세스 토큰 (JWT)
@@ -23,6 +25,7 @@ public class AuthTokenResponse {
      * </p>
      */
     @JsonProperty("access_token")
+    @Schema(description = "엑세스 토큰")
     private String accessToken;
 
     /**
@@ -33,6 +36,7 @@ public class AuthTokenResponse {
      * </p>
      */
     @JsonProperty("refresh_token")
+    @Schema(description = "리프레시 토큰")
     private String refreshToken;
 
     /**
@@ -43,6 +47,7 @@ public class AuthTokenResponse {
      * </p>
      */
     @JsonProperty("expires_in")
+    @Schema(description = "토큰 유효시간 (초)")
     private Long expiresIn;
 
     /**
@@ -53,5 +58,6 @@ public class AuthTokenResponse {
      * </p>
      */
     @JsonProperty("token_type")
+    @Schema(description = "토큰 인증 타입")
     private String tokenType;
 }

@@ -8,6 +8,8 @@ import com.github.sunguk0810.assignment.domain.health.event.HealthMeasureProduce
 import com.github.sunguk0810.assignment.domain.health.service.HealthService;
 import com.github.sunguk0810.assignment.global.dto.auth.CustomUserDetails;
 import com.github.sunguk0810.assignment.global.dto.response.ApiResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +29,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/api/v1/health/measure")
+@Tag(name = "Health", description = "건강 데이터 API")
 public class HealthMeasureController {
     private final HealthMeasureProducer producer;
     private final HealthService healthService;
@@ -42,6 +45,7 @@ public class HealthMeasureController {
      * @return 처리 성공 메시지를 포함한 {@link ApiResponse}
      */
     @PostMapping("")
+    @Operation(summary = "건강 측정 정보 저장", description = "웨어러블 기기 등에서 수집된 건강 데이터를 업로드합니다. (비동기 처리)")
     public ApiResponse<Void> saveMeasure(@RequestBody @Valid MeasureSaveRequest<? extends HealthDetail> request) {
         producer.saveLogAndProduce(request.getRecordKey(), request);
         return ApiResponse.success(null, "측정 데이터가 성공적으로 저장되었습니다.");
@@ -59,6 +63,7 @@ public class HealthMeasureController {
      * @return 건강 요약 정보 리스트를 포함한 {@link ApiResponse}
      */
     @GetMapping("")
+    @Operation(summary = "건강 데이터 조회", description = "기간별 건강 통계 데이터를 조회합니다.")
     public ApiResponse<List<HealthSummaryResponse>> getMeasureInfo(
             @AuthenticationPrincipal CustomUserDetails userDetails,
             @Valid MeasureSummaryRequest request) {

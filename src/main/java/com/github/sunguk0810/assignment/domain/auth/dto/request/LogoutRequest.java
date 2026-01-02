@@ -1,5 +1,6 @@
 package com.github.sunguk0810.assignment.domain.auth.dto.request;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
@@ -16,6 +17,7 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
+@Schema(description = "로그아웃 요청 DTO")
 public class LogoutRequest {
     /**
      * 삭제(무효화)할 리프레시 토큰 값
@@ -25,5 +27,6 @@ public class LogoutRequest {
      * </p>
      */
     @NotBlank(message = "refreshToken은 필수입니다.")
+    @Schema(description = "리프레시 토큰")
     private String refreshToken;
 }

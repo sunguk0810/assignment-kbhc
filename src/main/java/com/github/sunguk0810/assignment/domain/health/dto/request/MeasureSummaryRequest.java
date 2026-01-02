@@ -2,6 +2,7 @@ package com.github.sunguk0810.assignment.domain.health.dto.request;
 
 import com.github.sunguk0810.assignment.domain.health.constant.MeasureType;
 import com.github.sunguk0810.assignment.domain.health.constant.SummaryType;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -22,6 +23,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
+@Schema(description = "측정 요약 요청 DTO")
 public class MeasureSummaryRequest {
     /**
      * 조회할 건강 측정 데이터의 유형
@@ -32,6 +34,7 @@ public class MeasureSummaryRequest {
      * @see MeasureType
      */
     @NotNull(message = "측정 타입은 필수입니다. (예: STEPS, BLOOD_PRESSURE, ...)")
+    @Schema(description = "측정 타입", examples = {"steps", "bloodPressure"})
     private MeasureType type;
 
     /**
@@ -47,6 +50,7 @@ public class MeasureSummaryRequest {
      * @see SummaryType
      */
     @NotNull(message = "집계 방식은 필수입니다. (예: DAILY, MONTHLY)")
+    @Schema(description = "집계 방식", examples = {"daily", "monthly"})
     private SummaryType summaryType;
 
     /**
@@ -57,6 +61,7 @@ public class MeasureSummaryRequest {
      * </p>
      */
     @NotNull(message = "조회 시작일자는 필수입니다.")
+    @Schema(description = "조회 시작일자", example = "2025-12-01")
     private LocalDate startDate;
 
     /**
@@ -67,5 +72,6 @@ public class MeasureSummaryRequest {
      * </p>
      */
     @NotNull(message = "조회 종료일자는 필수입니다.")
+    @Schema(description = "조회 종료일자", example = "2025-12-31")
     private LocalDate endDate;
 }

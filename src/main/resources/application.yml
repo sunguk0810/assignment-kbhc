@@ -15,7 +15,7 @@ spring:
       on-profile: dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:13306/kbhc?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://127.0.0.1:13306/kbhc?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: kbhc
     password: kbhc123qwe!
   jpa:
@@ -39,4 +39,15 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       auto-offset-reset: earliest
-
+springdoc:
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  api-docs:
+    groups:
+      enable: true
+  swagger-ui:
+    operations-sorter: alpha
+    tags-sorter: alpha
+    doc-expansion: none
+  paths-to-match:
+    - /**

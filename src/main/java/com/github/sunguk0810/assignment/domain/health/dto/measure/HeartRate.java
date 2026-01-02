@@ -2,6 +2,7 @@ package com.github.sunguk0810.assignment.domain.health.dto.measure;
 import com.github.sunguk0810.assignment.domain.health.entity.HealthMeasureSummary;
 import com.github.sunguk0810.assignment.domain.health.entity.common.HealthDetail;
 import com.github.sunguk0810.assignment.domain.health.entity.common.Quantity;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -21,6 +22,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
+@Schema(description = "심박수")
 public class HeartRate extends HealthDetail{
     /**
      * 실제 측정된 심박수 데이터
@@ -28,6 +30,7 @@ public class HeartRate extends HealthDetail{
      * 일반적인 단위: {@code "bpm"} (beats per minute)
      * </p>
      */
+    @Schema(description = "심박수 수치")
     private Quantity heartRate;
 
     @Override

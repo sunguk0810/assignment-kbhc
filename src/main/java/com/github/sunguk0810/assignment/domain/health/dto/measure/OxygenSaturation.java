@@ -3,6 +3,7 @@ package com.github.sunguk0810.assignment.domain.health.dto.measure;
 import com.github.sunguk0810.assignment.domain.health.entity.HealthMeasureSummary;
 import com.github.sunguk0810.assignment.domain.health.entity.common.HealthDetail;
 import com.github.sunguk0810.assignment.domain.health.entity.common.Quantity;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -21,6 +22,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
+@Schema(description = "산소포화도")
 public class OxygenSaturation extends HealthDetail{
     /**
      * 실제 측정된 산소포화도 데이터
@@ -28,6 +30,7 @@ public class OxygenSaturation extends HealthDetail{
      * 일반적인 단위: {@code "%"}
      * </p>
      */
+    @Schema(description = "산소포화도 수치")
     private Quantity oxygenSaturation;
 
     @Override

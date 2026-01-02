@@ -1,6 +1,7 @@
 package com.github.sunguk0810.assignment.global.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -22,36 +23,43 @@ import java.util.Map;
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
+@Schema(description = "공통 API 응답 DTO")
 public class ApiResponse<T> {
     /**
      * 응답 상태 (예: "success", "error", "fail")
      */
+    @Schema(description = "응답 상태", examples = {"success", "error", "fail"})
     private String status;
 
     /**
      * 응답 메시지 (사용자에게 보여줄 알림 또는 디버깅용 메시지)
      */
+    @Schema(description = "응답 메시지", example = "정상적으로 수행하였습니다.")
     private String message;
 
     /**
      * 성공 시 반환할 실제 데이터 (Payload)
      * <p>실패 시에는 {@code null}일 수 있습니다.</p>
      */
+    @Schema(description = "응답 데이터")
     private T data;
 
     /**
      * 실패 시 반환할 에러 상세 정보
      */
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Schema(description = "에러 데이터")
     private T error;
 
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Schema(description = "에러 코드")
     private String code;
     /**
      * 응답 생성 일시
      */
     @Builder.Default
+    @Schema(description = "생성 일시")
     private LocalDateTime createdAt = LocalDateTime.now();
 
     /**

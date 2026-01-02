@@ -3,6 +3,7 @@ package com.github.sunguk0810.assignment.domain.health.dto.measure;
 import com.github.sunguk0810.assignment.domain.health.entity.HealthMeasureSummary;
 import com.github.sunguk0810.assignment.domain.health.entity.common.HealthDetail;
 import com.github.sunguk0810.assignment.domain.health.entity.common.Quantity;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -22,6 +23,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
+@Schema(description = "혈당")
 public class BloodSugar extends HealthDetail{
 
     /**
@@ -30,6 +32,7 @@ public class BloodSugar extends HealthDetail{
      * 일반적인 단위: {@code "mg/dL"} 또는 {@code "mmol/L"}
      * </p>
      */
+    @Schema(description = "혈당 수치")
     private Quantity bloodSugar;
 
 

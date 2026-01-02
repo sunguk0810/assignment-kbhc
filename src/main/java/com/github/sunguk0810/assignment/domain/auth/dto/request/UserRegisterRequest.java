@@ -1,6 +1,7 @@
 package com.github.sunguk0810.assignment.domain.auth.dto.request;
 
 import com.github.sunguk0810.assignment.global.constant.GenderType;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -21,6 +22,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Schema(description = "사용자 회원가입 DTO")
 public class UserRegisterRequest {
     /**
      * 사용자 이메일 (로그인 아이디)
@@ -31,6 +33,7 @@ public class UserRegisterRequest {
     @NotBlank(message = "이메일은 필수 입력값입니다.")
     @Email(regexp = "^[a-zA-Z0-9+-\\_.]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$",
             message = "올바른 이메일 형식이 아닙니다.")
+    @Schema(description = "이메일", example = "admin@admin.com")
     private String email;
 
     /**
@@ -41,6 +44,7 @@ public class UserRegisterRequest {
      */
     @NotBlank(message = "이름은 필수 입력값입니다.")
     @Size(min = 2, message = "이름은 2글자 이상이어야 합니다.")
+    @Schema(description = "이름", example = "김이박")
     private String username;
 
     /**
@@ -52,6 +56,7 @@ public class UserRegisterRequest {
     @NotBlank(message = "비밀번호는 필수 입력값입니다.")
     @Pattern(regexp = "^(?:(?=.*[a-zA-Z])(?=.*\\d)|(?=.*[a-zA-Z])(?=.*\\W)|(?=.*\\d)(?=.*\\W))[a-zA-Z\\d\\W]{8,20}$",
             message = "비밀번호는 8~20자의 영문, 숫자, 특수문자 중 2종류 이상을 조합해야 합니다.")
+    @Schema(description = "비밀번호", example="abc123qwe!")
     private String password;
 
     /**
@@ -62,6 +67,7 @@ public class UserRegisterRequest {
      */
     @NotNull(message = "프로필 정보는 필수입니다.")
     @Valid
+    @Schema(description = "프로필 정보")
     private Profile profiles;
 
     /**
@@ -83,6 +89,7 @@ public class UserRegisterRequest {
          * <p>필수 입력 항목입니다.</p>
          */
         @NotNull(message = "생년월일은 필수 입력값입니다.")
+        @Schema(description = "생년월일", example = "1990-01-01")
         private LocalDate birthDate;
 
         /**
@@ -91,6 +98,7 @@ public class UserRegisterRequest {
          * @see GenderType
          */
         @NotNull(message = "성별은 필수 입력값입니다.")
+        @Schema(description = "성별", examples = {"MAN", "WOMAN"})
         private GenderType gender;
 
         /**
@@ -98,6 +106,7 @@ public class UserRegisterRequest {
          * <p>필수 입력 항목입니다.</p>
          */
         @NotBlank(message = "닉네임은 필수 입력값입니다.")
+        @Schema(description = "닉네임", example = "하늘을나는다람쥐")
         private String nickname;
 
         /**
@@ -105,18 +114,21 @@ public class UserRegisterRequest {
          * <p>필수 입력 항목입니다.</p>
          */
         @NotBlank(message = "휴대폰 번호는 필수 입력값입니다.")
+        @Schema(description = "휴대폰 번호", example="010-1234-1234")
         private String mobileNo;
 
         /**
          * 신장 (키)
          * <p>단위: {@code cm}</p>
          */
+        @Schema(description = "키 (cm)", example="184")
         private Double height;
 
         /**
          * 체중 (몸무게)
          * <p>단위: {@code kg}</p>
          */
+        @Schema(description = "몸무게 (kg)", example="70.4")
         private Double weight;
     }
 }

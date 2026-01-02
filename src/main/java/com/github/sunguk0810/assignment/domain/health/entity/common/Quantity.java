@@ -1,6 +1,7 @@
 package com.github.sunguk0810.assignment.domain.health.entity.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -16,17 +17,20 @@ import lombok.NoArgsConstructor;
 @Embeddable
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Schema(description = "수량")
 public class Quantity {
     /**
      * 측정값의 단위
      * <p>예: {@code "m"}, {@code "kg"}, {@code "mmHg"}</p>
      */
+    @Schema(description = "단위", examples = {"m", "kg", "mmHg"})
     private String unit;
 
     /**
      * 단위와 연계된 실제 수치 값
      * <p>예: {@code 100.5}, {@code 85.0}</p>
      */
+    @Schema(description = "수치", examples = {"100.5", "85.0"})
     private Double value;
 
     /**
