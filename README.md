@@ -78,7 +78,19 @@ docker-compose up -d
 ```
 애플리케이션이 정상적으로 실행되면 `http://localhost:8080`으로 접근 가능합니다.
 
-### 4. API 테스트 (Postman)
-`documents/postman/Postman_API_Collection.json` 파일을 Postman에 Import하여 테스트할 수 있습니다.
+### 4. API 테스트 및 문서 확인
+본 프로젝트는 **Swagger UI**와 **Postman Collection** 두 가지 방식을 모두 지원합니다.
+
+#### 1) Swagger UI (웹 브라우저)
+서버 실행 후 아래 URL에 접속하여 API 문서를 확인하고 직접 테스트해볼 수 있습니다.
+- **URL**: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+- **인증 방법**:
+    1. `POST /api/v1/auth/login` 또는 `register` API를 통해 `accessToken` 발급
+    2. 우측 상단의 **Authorize** 버튼 클릭
+    3. Value 란에 토큰 값 입력
+    4. **Authorize** -> **Close**
+
+#### 2) Postman (API 클라이언트)
+`documents/postman/Postman_API_Collection.json` 파일을 Postman에 Import하여 미리 구성된 요청 예시를 바로 사용할 수 있습니다.
 
 ---
