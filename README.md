@@ -85,7 +85,7 @@ docker-compose up -d
 서버 실행 후 아래 URL에 접속하여 API 문서를 확인하고 직접 테스트해볼 수 있습니다.
 - **URL**: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 - **인증 방법**:
-    1. `POST /api/v1/auth/login` 또는 `register` API를 통해 `accessToken` 발급
+    1. `POST /api/v1/auth/login` API를 통해 `accessToken` 발급
     2. 우측 상단의 **Authorize** 버튼 클릭
     3. Value 란에 토큰 값 입력
     4. **Authorize** -> **Close**
