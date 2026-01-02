@@ -103,22 +103,26 @@ public class AuthController {
      * </p>
      *
      * @param request   리프레시 토큰 정보를 포함한 로그아웃 요청 DTO
-     * @param principal 현재 인증된 사용자의 Principal 객체
+     * @param userDetails 인증된 사용자 세부 정보 (Security Context)
      * @return 성공 메시지
      * @throws BusinessException {@link ErrorType#USER_NOT_FOUND} 인증 정보가 없는 경우 발생
      */
     @PostMapping("logout")
     @Operation(summary = "로그아웃", description = "Refresh Token을 무효화하여 로그아웃 처리합니다.")
-    public ApiResponse<Void> logout(@RequestBody @Valid LogoutRequest request, Principal principal){
-        if (principal == null){
-            throw new BusinessException(ErrorType.USER_NOT_FOUND);
-        }
-        if (principal instanceof UsernamePasswordAuthenticationToken token){
-            if (token.getPrincipal() != null && token.getPrincipal() instanceof User user){
-                String recordKey = user.getRecordKey();
-                authService.logout(recordKey, request);
-            }
-        }
+    public ApiResponse<Void> logout(
+            @RequestBody @Valid LogoutRequest request,
+            @AuthenticationPrincipal CustomUserDetails userDetails){
+        String recordKey = userDetails.getUser().getRecordKey();
+        authService.logout(recordKey, request);
+//        if (principal == null){
+//            throw new BusinessException(ErrorType.USER_NOT_FOUND);
+//        }
+//        if (principal instanceof UsernamePasswordAuthenticationToken token){
+//            if (token.getPrincipal() != null && token.getPrincipal() instanceof User user){
+//                String recordKey = user.getRecordKey();
+//                authService.logout(recordKey, request);
+//            }
+//        }
         return ApiResponse.success(null, "로그아웃이 완료되었습니다.");
     }
 }

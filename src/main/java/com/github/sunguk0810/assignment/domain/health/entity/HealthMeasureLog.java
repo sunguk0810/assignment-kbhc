@@ -49,7 +49,7 @@ public class HealthMeasureLog extends BaseEntity {
     /**
      * 측정을 수행한 사용자와의 연관 관계 ({@link User})
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "record_key", comment = "사용자 구분 키", nullable = false, foreignKey = @ForeignKey(name = "FK_HEALTH_MEASURE_LOG_RECORD_KEY"))
     private User userInfo;
     /**
