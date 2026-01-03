@@ -22,17 +22,6 @@ import java.util.List;
 public class HealthMeasureSummaryRepositoryImpl implements HealthMeasureSummaryRepositoryCustom {
     private final JdbcTemplate jdbcTemplate;
 
-    // Average 내는 BLOOD_PRESSURE, BLOOD_SUGAR, HEART_RATE, OXYGEN_SATURATION
-    // 단순 평균에서 가중 평균으로 수정
-    // 이유 : 측정치의 값을 단순평균했을 때 다음과 같은 오류가 발생 할 수 있음
-    // 예시)
-    // SUMMARY_DATE | MEASURE_TYPE | COUNT | AVG_HEART_RATE
-    // ----------------------------------------------------
-    // 2026-01-02   | HEART_RATE   | 10    | 120
-    // 2026-01-03   | HEART_RATE   | 1     | 180
-    // 이라는 값이 있을 때 단순 평균, 가중 평균의 값은 다음과 같다.
-    // 단순 평균 : 120 + 180 / 2 = 150
-    // 가중 평균 : (120 * 10 + 180 * 1) / (10 + 1) = 125.45
     public List<HealthMeasureSummary> findMonthlyUserSummary(User user, MeasureType measureType, LocalDate startDate, LocalDate endDate) {
 
         // 쿼리 조합
