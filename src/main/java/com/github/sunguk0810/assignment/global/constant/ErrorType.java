@@ -56,7 +56,7 @@ public enum ErrorType {
      * 인가되지 않은 행위 등을 한 경우
      * <p>HTTP 401 Unauthorized</p>
      */
-    UNAUTHORIZED(401, "C006", ""),
+    UNAUTHORIZED(401, "C006", "인증되지 않은 유저입니다."),
 
     /**
      * 조회하려는 사용자가 존재하지 않는 경우

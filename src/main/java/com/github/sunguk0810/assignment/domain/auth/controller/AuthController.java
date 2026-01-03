@@ -112,6 +112,9 @@ public class AuthController {
     public ApiResponse<Void> logout(
             @RequestBody @Valid LogoutRequest request,
             @AuthenticationPrincipal CustomUserDetails userDetails){
+        if (userDetails == null) {
+            throw new BusinessException(ErrorType.UNAUTHORIZED);
+        }
         String recordKey = userDetails.getUser().getRecordKey();
         authService.logout(recordKey, request);
 //        if (principal == null){

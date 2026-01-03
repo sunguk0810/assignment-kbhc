@@ -51,11 +51,11 @@ API 요청/응답 객체(DTO)와 데이터베이스 객체(Entity)를 엄격하�
 
 ### 5.1. JPA 통계 쿼리 매핑 오류 (`Column 'summary_id' not found`)
 - **상황**: 월간 요약 데이터를 `GROUP BY`로 조회하여 `HealthMeasureSummary` 엔티티로 반환하려 했으나, 집계 결과에는 식별자(`summary_id`)가 없어 JPA가 엔티티를 매핑하지 못함.
-- **해결**: 영속성 컨텍스트를 거치지 않는 **`JdbcTemplate`**을 도입. SQL 실행 후 `RowMapper`를 통해 비영속(Transient) 엔티티 객체를 직접 생성하여 반환함으로써 해결.
+- **해결**: 영속성 컨텍스트를 거치지 않는 **`JdbcTemplate`** 을 도입. SQL 실행 후 `RowMapper`를 통해 비영속(Transient) 엔티티 객체를 직접 생성하여 반환함으로써 해결.
 
 ### 5.2. 측정 타입별 동적 쿼리 구성 전략
 - **상황**: 측정 타입(`STEPS`, `BLOOD_PRESSURE` 등)에 따라 조회해야 할 컬럼(`SUM(steps)` vs `AVG(systolic)`)이 달라져 정적 쿼리(`@Query`)로 처리 불가.
-- **해결**: Java 코드 레벨에서 `switch` 문을 활용해 **쿼리 조각(Fragment)**을 생성하고, `String.format`으로 최종 SQL을 조립하는 동적 SQL 방식 적용.
+- **해결**: Java 코드 레벨에서 `switch` 문을 활용해 **쿼리 조각(Fragment)** 을 생성하고, `String.format`으로 최종 SQL을 조립하는 동적 SQL 방식 적용.
 
 
 ---
