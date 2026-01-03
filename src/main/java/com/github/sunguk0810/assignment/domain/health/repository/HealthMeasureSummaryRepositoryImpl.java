@@ -22,27 +22,41 @@ import java.util.List;
 public class HealthMeasureSummaryRepositoryImpl implements HealthMeasureSummaryRepositoryCustom {
     private final JdbcTemplate jdbcTemplate;
 
+    // Average 내는 BLOOD_PRESSURE, BLOOD_SUGAR, HEART_RATE, OXYGEN_SATURATION
+    // 단순 평균에서 가중 평균으로 수정
+    // 이유 : 측정치의 값을 단순평균했을 때 다음과 같은 오류가 발생 할 수 있음
+    // 예시)
+    // SUMMARY_DATE | MEASURE_TYPE | COUNT | AVG_HEART_RATE
+    // ----------------------------------------------------
+    // 2026-01-02   | HEART_RATE   | 10    | 120
+    // 2026-01-03   | HEART_RATE   | 1     | 180
+    // 이라는 값이 있을 때 단순 평균, 가중 평균의 값은 다음과 같다.
+    // 단순 평균 : 120 + 180 / 2 = 150
+    // 가중 평균 : (120 * 10 + 180 * 1) / (10 + 1) = 125.45
     public List<HealthMeasureSummary> findMonthlyUserSummary(User user, MeasureType measureType, LocalDate startDate, LocalDate endDate) {
 
         // 쿼리 조합
+        // 26-01-03 수정
+        // 일일 측정 횟수의 편차가 클 수 있기에, 단순 평균대신 가중 평균을 사용
+        // 예시 - 심박수) SUM(hms.avg_blood_sugar * hms.count) / SUM(hms.count)
         String queryFragment = switch (measureType) {
             case STEPS -> """
-                    , SUM(hms.sum_steps)             AS steps
-                    , SUM(hms.sum_calories)          AS calories
-                    , SUM(hms.sum_distance)          AS distance
+                    , SUM(hms.sum_steps)                                  AS steps
+                    , SUM(hms.sum_calories)                               AS calories
+                    , SUM(hms.sum_distance)                               AS distance
                     """;
             case BLOOD_PRESSURE -> """
-                    , AVG(hms.avg_systolic)          AS systolic
-                    , AVG(hms.avg_diastolic)         AS diastolic
+                    , SUM(hms.avg_systolic * hms.count) / SUM(hms.count)  AS systolic
+                    , SUM(hms.avg_diastolic * hms.count) / SUM(hms.count) AS diastolic
                     """;
             case BLOOD_SUGAR -> """
-                    , AVG(hms.avg_blood_sugar)       AS bloodSugar
+                    , SUM(hms.avg_blood_sugar * hms.count) / SUM(hms.count) AS bloodSugar
                     """;
             case HEART_RATE -> """
-                    , AVG(hms.avg_heart_rate)        AS heartRate
+                    , SUM(hms.avg_heart_rate * hms.count) / SUM(hms.count)  AS heartRate
                     """;
             case OXYGEN_SATURATION -> """
-                    , AVG(hms.avg_oxygen_saturation) AS oxygenSaturation
+                    , SUM(hms.avg_oxygen_saturation * hms.count) / SUM(hmg.count) AS oxygenSaturation
                     """;
             default -> throw new BusinessException(ErrorType.INVALID_PARAMETER);
         };
