@@ -94,8 +94,11 @@ public class MeasureSaveRequest<T extends HealthDetail> {
      */
     @lombok.Data
     public static class Data<T extends HealthDetail> {
+        @Schema(description = "측정 데이터 목록")
         private List<T> entries;
+        @Schema(description = "측정 장치 정보")
         private DeviceInfo source;
+        @Schema(description = "메모")
         private String memo;
     }
 
