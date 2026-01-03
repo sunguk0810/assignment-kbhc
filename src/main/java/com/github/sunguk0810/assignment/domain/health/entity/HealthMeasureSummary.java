@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.StringJoiner;
 
 @Getter
 @Entity
@@ -89,6 +90,24 @@ public class HealthMeasureSummary extends BaseEntity {
         this.avgHeartRate = avgHeartRate != null ? avgHeartRate : 0L;
         this.avgOxygenSaturation = avgOxygenSaturation != null ? avgOxygenSaturation : 0.0;
         this.count = count != null ? count : 0L;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", HealthMeasureSummary.class.getSimpleName() + "[", "]")
+                .add("summaryId=" + summaryId)
+                .add("measureType=" + measureType)
+                .add("summaryDate=" + summaryDate)
+                .add("sumSteps=" + sumSteps)
+                .add("sumCalories=" + sumCalories)
+                .add("sumDistance=" + sumDistance)
+                .add("avgSystolic=" + avgSystolic)
+                .add("avgDiastolic=" + avgDiastolic)
+                .add("avgBloodSugar=" + avgBloodSugar)
+                .add("avgHeartRate=" + avgHeartRate)
+                .add("avgOxygenSaturation=" + avgOxygenSaturation)
+                .add("count=" + count)
+                .toString();
     }
 
     /**
