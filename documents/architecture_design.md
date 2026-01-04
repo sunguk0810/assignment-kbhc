@@ -5,30 +5,8 @@
 본 프로젝트는 대용량 건강 데이터의 수집, 처리, 조회를 효율적으로 수행하기 위해 **이벤트 기반 아키텍처(Event-Driven Architecture)** 와 **계층형 아키텍처(Layered Architecture)** 를 혼합하여 설계되었습니다.
 
 ### 1.1. 시스템 구성도
-```mermaid
-graph TD
-    Client[Client App / Device] -->|REST API| WAS[Spring Boot Application]
-    
-    subgraph "Application Layer"
-        AuthController[Auth Controller]
-        HealthController[Health Measure Controller]
-        Producer[Kafka Producer]
-        Consumer[Kafka Consumer]
-        Service[Business Logic Service]
-    end
-    
-    WAS --> AuthController
-    WAS --> HealthController
-    
-    HealthController --> Producer
-    Producer -->|Publish Event| Kafka[Apache Kafka]
-    Kafka -->|Subscribe Event| Consumer
-    
-    Consumer -->|Async Process| Service
-    Service -->|Read/Write| DB[(MySQL)]
-    
-    AuthController -->|Cache/Session| Redis[(Redis)]
-```
+
+![System Architecture](./images/system_architecture.png)
 
 ### 1.2. 핵심 아키텍처 패턴
 1.  **비동기 처리 (Asynchronous Processing)**:
