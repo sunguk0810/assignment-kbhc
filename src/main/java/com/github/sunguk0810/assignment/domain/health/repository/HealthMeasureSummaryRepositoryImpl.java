@@ -45,7 +45,7 @@ public class HealthMeasureSummaryRepositoryImpl implements HealthMeasureSummaryR
                     , SUM(hms.avg_heart_rate * hms.count) / SUM(hms.count)  AS heartRate
                     """;
             case OXYGEN_SATURATION -> """
-                    , SUM(hms.avg_oxygen_saturation * hms.count) / SUM(hmg.count) AS oxygenSaturation
+                    , SUM(hms.avg_oxygen_saturation * hms.count) / SUM(hms.count) AS oxygenSaturation
                     """;
             default -> throw new BusinessException(ErrorType.INVALID_PARAMETER);
         };
